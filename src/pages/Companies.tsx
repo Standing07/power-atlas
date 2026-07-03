@@ -3,10 +3,12 @@ import { useLang, pick, type Lang } from '../i18n'
 import Flag from '../components/Flag'
 import InfoTip from '../components/InfoTip'
 import companiesData from '../data/companies.json'
+import offtakersData from '../data/offtakers.json'
+import Carousel from '../components/Carousel'
 import { twhToHuman, fmt } from '../lib/energy'
 
 type L10n = { zh: string; en: string }
-const INDUSTRIES = ['all', 'semiconductor', 'tech', 'telecom', 'steel', 'petrochemical'] as const
+const INDUSTRIES = ['all', 'semiconductor', 'tech', 'telecom', 'steel', 'petrochemical', 'transport', 'auto'] as const
 
 export default function Companies() {
   const { t, lang } = useLang()
@@ -27,14 +29,18 @@ export default function Companies() {
         <p className="mt-2 max-w-2xl text-sm text-stone-500">{t('companies_subtitle')}</p>
       </header>
 
-      {/* 高盛視角：全球綠電採購（offtaker）市場輪廓 */}
-      <div className="rounded-3xl border-2 border-brand-100 bg-brand-50/50 p-5">
-        <h2 className="font-bold text-brand-700">🌍 {t('offtakers_title')}</h2>
-        <p className="mt-2 text-sm leading-relaxed text-stone-700">{t('offtakers_body')}</p>
-        <a href="https://about.bnef.com/insights/clean-energy/corporate-clean-energy-buying-fell-in-2025-after-nearly-a-decade-of-growth/" target="_blank" rel="noreferrer" className="mt-2 inline-block text-xs text-brand-600 hover:underline">
-          {t('source_label')}：BloombergNEF ↗
-        </a>
-      </div>
+      {/* 全球綠電採購市場輪廓（翻頁卡） */}
+      <Carousel
+        items={offtakersData.slides.map((s) => (
+          <div key={s.title.en} className="flex h-full min-h-44 flex-col rounded-3xl border-2 border-brand-100 bg-brand-50/50 p-5">
+            <h2 className="font-bold text-brand-700">🌍 {t('offtakers_title')}｜{pick(lang as Lang, s.title as L10n)}</h2>
+            <p className="mt-2 flex-1 text-sm leading-relaxed text-stone-700">{pick(lang as Lang, s.text as L10n)}</p>
+            <a href={s.source.url} target="_blank" rel="noreferrer" className="mt-2 inline-block text-xs text-brand-600 hover:underline">
+              {t('source_label')}：{s.source.label} ↗
+            </a>
+          </div>
+        ))}
+      />
 
       <div className="flex flex-wrap gap-1.5">
         {INDUSTRIES.map((i) => (

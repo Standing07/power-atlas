@@ -13,10 +13,10 @@
     "USA": [
       {
         "text": {
-          "zh": "資料中心是美國最大的用電成長來源：2023 年約佔全美用電 4%，EIA 預估 2028 年達 7–12%；IEA 估到 2030 年約一半的美國新增用電來自資料中心。",
-          "en": "Data centers are the biggest source of US demand growth: ~4% of US electricity in 2023, projected by the EIA to reach 7–12% by 2028; the IEA expects about half of new US demand through 2030 to come from data centers."
+          "zh": "資料中心是美國最大的單一用電族群之一：2023 年約用掉全美 4% 的電。Google 與微軟等雲端巨頭「自身」用電已連續兩年成長超過 25%——注意這是單一企業的成長率，全美整體需求年增約 2%，兩者並不衝突。",
+          "en": "Data centers are one of America's biggest single power-user groups, using ~4% of US electricity in 2023. Cloud giants like Google and Microsoft have grown their own usage by 25%+ for two straight years — a company-level rate; national demand grows ~2% a year, so the two figures are consistent."
         },
-        "source": { "label": "EIA / IEA Electricity 2026", "url": "https://www.iea.org/reports/electricity-2026/demand" }
+        "source": { "label": "EIA / Yahoo Finance", "url": "https://www.eia.gov/energyexplained/electricity/use-of-electricity.php" }
       }
     ],
     "KOR": [

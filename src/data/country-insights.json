@@ -58,15 +58,6 @@
         "source": { "label": "Ember Global Electricity Review 2026", "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/" }
       }
     ],
-    "USA": [
-      {
-        "text": {
-          "zh": "AI 與資料中心正成為美國電力需求成長的主要動力：Google 與微軟的用電量已連續兩年成長超過 25%。",
-          "en": "AI and data centers are becoming the main driver of US demand growth: Google's and Microsoft's electricity use has grown over 25% for two years running."
-        },
-        "source": { "label": "Yahoo Finance / IEA Global Energy Review 2025", "url": "https://www.iea.org/reports/global-energy-review-2025/electricity" }
-      }
-    ],
     "DNK": [
       {
         "text": {

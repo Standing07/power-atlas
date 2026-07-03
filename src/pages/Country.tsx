@@ -14,6 +14,7 @@ import sectorData from '../data/sector-breakdown.json'
 import outlookData from '../data/outlook.json'
 import consumersData from '../data/major-consumers.json'
 import CountrySelect from '../components/CountrySelect'
+import Carousel from '../components/Carousel'
 
 type L10n = { zh: string; en: string }
 interface SourcedItem { text: L10n; source: { label: string; url: string } }
@@ -216,45 +217,53 @@ function SectorSection({ iso3 }: { iso3: string }) {
 
 /** 未來五年展望：只顯示該國專屬預測（全球趨勢放首頁） */
 function OutlookSection({ iso3 }: { iso3: string }) {
-  const { t, lang } = useLang()
+  const { t } = useLang()
   const items = (outlookData.countries as Record<string, SourcedItem[]>)[iso3] ?? []
   if (!items.length) return null
   return (
     <section>
       <h2 className="text-xl font-bold text-stone-900">🔮 {t('outlook_title')}</h2>
       <p className="mt-1 text-sm text-stone-500">{t('outlook_subtitle')}</p>
-      <div className="mt-4 grid gap-3 md:grid-cols-2">
-        {items.map((it, i) => (
-          <div key={i} className="rounded-3xl border-2 border-brand-100 bg-brand-50/50 p-5 shadow-sm">
-            <p className="text-sm leading-relaxed text-stone-700">{pick(lang as Lang, it.text)}</p>
-            <a href={it.source.url} target="_blank" rel="noreferrer" className="mt-2 inline-block text-xs text-brand-600 hover:underline">
-              {t('source_label')}：{it.source.label} ↗
-            </a>
-          </div>
-        ))}
+      <div className="mt-4">
+        <SourcedCarousel items={items} accent />
       </div>
     </section>
   )
 }
 
+/** 翻頁式來源卡片列表 */
+function SourcedCarousel({ items, accent = false }: { items: SourcedItem[]; accent?: boolean }) {
+  const { t, lang } = useLang()
+  return (
+    <Carousel
+      items={items.map((it, i) => (
+        <div
+          key={i}
+          className={`flex h-full min-h-32 flex-col rounded-3xl p-5 shadow-sm ${
+            accent ? 'border-2 border-brand-100 bg-brand-50/50' : 'border border-stone-200 bg-white'
+          }`}
+        >
+          <p className="flex-1 text-sm leading-relaxed text-stone-700">{pick(lang as Lang, it.text)}</p>
+          <a href={it.source.url} target="_blank" rel="noreferrer" className="mt-2 inline-block text-xs text-brand-600 hover:underline">
+            {t('source_label')}：{it.source.label} ↗
+          </a>
+        </div>
+      ))}
+    />
+  )
+}
+
 /** 誰用掉最多電：該國用電大戶與成長熱點（有查證資料的國家才顯示） */
 function ConsumersSection({ iso3 }: { iso3: string }) {
-  const { t, lang } = useLang()
+  const { t } = useLang()
   const items = (consumersData.countries as Record<string, SourcedItem[]>)[iso3] ?? []
   if (!items.length) return null
   return (
     <section>
       <h2 className="text-xl font-bold text-stone-900">🏭 {t('consumers_title')}</h2>
       <p className="mt-1 text-sm text-stone-500">{t('consumers_subtitle')}</p>
-      <div className="mt-4 space-y-3">
-        {items.map((it, i) => (
-          <div key={i} className="rounded-3xl border border-stone-200 bg-white p-5 shadow-sm">
-            <p className="text-sm leading-relaxed text-stone-700">{pick(lang as Lang, it.text)}</p>
-            <a href={it.source.url} target="_blank" rel="noreferrer" className="mt-2 inline-block text-xs text-brand-600 hover:underline">
-              {t('source_label')}：{it.source.label} ↗
-            </a>
-          </div>
-        ))}
+      <div className="mt-4">
+        <SourcedCarousel items={items} />
       </div>
     </section>
   )
@@ -262,22 +271,15 @@ function ConsumersSection({ iso3 }: { iso3: string }) {
 
 /** 深度洞察：Ember / IEA / BNEF 等權威來源的人工整理分析 */
 function InsightsSection({ iso3 }: { iso3: string }) {
-  const { t, lang } = useLang()
+  const { t } = useLang()
   const items = (insightsData.countries as Record<string, { text: { zh: string; en: string }; source: { label: string; url: string } }[]>)[iso3]
   if (!items?.length) return null
   return (
     <section>
       <h2 className="text-xl font-bold text-stone-900">🔍 {t('insights_title')}</h2>
       <p className="mt-1 text-sm text-stone-500">{t('insights_subtitle')}</p>
-      <div className="mt-4 space-y-3">
-        {items.map((it, i) => (
-          <div key={i} className="rounded-3xl border border-stone-200 bg-white p-5 shadow-sm">
-            <p className="text-sm leading-relaxed text-stone-700">{pick(lang as Lang, it.text)}</p>
-            <a href={it.source.url} target="_blank" rel="noreferrer" className="mt-2 inline-block text-xs text-brand-600 hover:underline">
-              {t('source_label')}：{it.source.label} ↗
-            </a>
-          </div>
-        ))}
+      <div className="mt-4">
+        <SourcedCarousel items={items} />
       </div>
     </section>
   )

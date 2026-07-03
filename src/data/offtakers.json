@@ -1,0 +1,37 @@
+{
+  "_comment": "全球綠電採購市場輪廓（企業用電頁翻頁卡）：人工整理自 BNEF、RE100，附來源。",
+  "slides": [
+    {
+      "title": { "zh": "誰買最多綠電？", "en": "Who buys the most clean power?" },
+      "text": {
+        "zh": "亞馬遜連續多年蟬聯全球最大企業綠電買家：2023 年單年簽約 8.8GW、橫跨 16 國，累計綠電組合達 33.6GW，2024 年再度居冠；Meta、Google、微軟與瑪氏（Mars）同列前五大。",
+        "en": "Amazon has been the world's largest corporate clean-power buyer for years running: 8.8 GW signed across 16 countries in 2023 alone, a 33.6 GW cumulative portfolio, and #1 again in 2024; Meta, Google, Microsoft and Mars round out the top five."
+      },
+      "source": { "label": "BloombergNEF", "url": "https://about.bnef.com/insights/finance/corporate-clean-power-buying-grew-12-to-new-record-in-2023-according-to-bloombergnef/" }
+    },
+    {
+      "title": { "zh": "市場有多大？", "en": "How big is the market?" },
+      "text": {
+        "zh": "全球企業綠電購電契約（PPA）2023 年達 46GW 歷史新高（2022 年為 41GW）；但 2025 年出現近十年來首次下滑——政策不確定性與電網瓶頸是主因。",
+        "en": "Global corporate clean-power PPAs hit a record 46 GW in 2023 (up from 41 GW in 2022) — before the first decline in nearly a decade in 2025, on policy uncertainty and grid bottlenecks."
+      },
+      "source": { "label": "BloombergNEF", "url": "https://about.bnef.com/insights/clean-energy/corporate-clean-energy-buying-fell-in-2025-after-nearly-a-decade-of-growth/" }
+    },
+    {
+      "title": { "zh": "RE100 企業合計用電超過一個法國", "en": "RE100 members out-consume France" },
+      "text": {
+        "zh": "RE100 倡議已有 440+ 家企業，年用電合計超過 570 TWh——比法國或韓國全國還多，2024 年整體再生能源比例 53%；其中 28%（42 TWh）透過購電契約（PPA）取得，至 2024 年中已累計簽下 37GW 太陽能與 20GW 風電。",
+        "en": "RE100 now counts 440+ companies using over 570 TWh a year — more than France or South Korea — at a 53% renewable share in 2024; 28% (42 TWh) is sourced via PPAs, with 37 GW of solar and 20 GW of wind signed by mid-2024."
+      },
+      "source": { "label": "RE100", "url": "https://www.there100.org/our-work/news/re100-members-now-consume-more-electricity-year-france" }
+    },
+    {
+      "title": { "zh": "缺口在哪裡？（商機所在）", "en": "Where are the gaps? (the opportunity)" },
+      "text": {
+        "zh": "綠電供給跟不上企業需求的市場最值得關注：RE100 成員在日本只買得到 36% 綠電（全球平均 53%）；韓國的三星、SK 海力士等出口大戶面臨同樣困境；台灣的綠電幾乎被台積電包下——這些缺口正是新電廠與跨境電網的投資機會。",
+        "en": "The biggest opportunities are where corporate demand outruns supply: RE100 members source only 36% renewables in Japan (vs 53% globally); Korea's exporters like Samsung and SK Hynix face the same squeeze; in Taiwan, TSMC absorbs most available green power — gaps that new plants and cross-border grids can fill."
+      },
+      "source": { "label": "RE100 / Ember", "url": "https://www.there100.org/our-work/news/re100-members-are-accelerating-energy-transition-japan" }
+    }
+  ]
+}

@@ -102,6 +102,46 @@
       "source": { "label": "上下游新聞 2022", "url": "https://www.newsmarket.com.tw/blog/140974/" }
     },
     {
+      "id": "tencent", "name": { "zh": "騰訊", "en": "Tencent" }, "industry": "tech", "region": "CN",
+      "electricityTWh": null, "electricityYear": null,
+      "renewablePct": 54, "renewableYear": 2024,
+      "cppa": { "zh": "自建資料中心 54% 用電來自再生能源；2024 年綠電採購逾 13 億度，並在資料中心建置微電網", "en": "54% of its own data centers' electricity is renewable; purchased 1.3+ TWh of green power in 2024 and is building data-center microgrids" },
+      "target": { "zh": "2030 年營運碳中和、100% 綠電", "en": "Carbon-neutral operations and 100% green power by 2030" },
+      "source": { "label": "Tencent / DCD 2024–2025", "url": "https://www.datacenterdynamics.com/en/news/tencent-launches-renewable-powered-microgrid-project-at-data-center-in-china/" }
+    },
+    {
+      "id": "alibaba", "name": { "zh": "阿里巴巴", "en": "Alibaba" }, "industry": "tech", "region": "CN",
+      "electricityTWh": null, "electricityYear": null,
+      "renewablePct": 39, "renewableYear": 2024,
+      "cppa": { "zh": "集團潔淨電力比例 39%（FY2024，年增 11.8 個百分點）；阿里雲自建資料中心達 56%", "en": "39% clean electricity group-wide (FY2024, up 11.8 points year on year); Alibaba Cloud's own data centers reached 56%" },
+      "target": { "zh": "2030 年營運碳中和", "en": "Carbon-neutral operations by 2030" },
+      "source": { "label": "Alibaba 2024 ESG Report", "url": "https://www.alibabacloud.com/blog/alibaba-progresses-towards-carbon-neutrality-goals-and-digital-inclusion-2024-esg-report_601423" }
+    },
+    {
+      "id": "db", "name": { "zh": "德國鐵路 Deutsche Bahn", "en": "Deutsche Bahn" }, "industry": "transport", "region": "DE",
+      "electricityTWh": null, "electricityYear": null,
+      "renewablePct": 71.5, "renewableYear": 2025,
+      "cppa": { "zh": "列車牽引用電已 71.5% 來自再生能源；2025 年再簽 2.5 TWh 太陽能購電契約，供 ICE 高鐵使用", "en": "71.5% of its traction power is already renewable; signed 2.5 TWh of solar PPAs in 2025 to power ICE trains" },
+      "target": { "zh": "2038 年牽引用電 100% 綠電", "en": "100% renewable traction power by 2038" },
+      "source": { "label": "Deutsche Bahn / SolarQuarter 2025", "url": "https://nachhaltigkeit.deutschebahn.com/en/ecological-transformation/measures/solar-engergy" }
+    },
+    {
+      "id": "infosys", "name": { "zh": "印孚瑟斯 Infosys", "en": "Infosys" }, "industry": "tech", "region": "IN",
+      "electricityTWh": null, "electricityYear": null,
+      "renewablePct": null, "renewableYear": null,
+      "cppa": { "zh": "印度第一家加入 RE100 的企業，被 RE100 列為印度企業綠電採購的領頭羊（自建太陽能＋購電並行）", "en": "The first Indian company to join RE100, cited by RE100 as India's corporate-sourcing leader (own solar plus procurement)" },
+      "target": { "zh": "RE100：100% 再生電力", "en": "RE100: 100% renewable electricity" },
+      "source": { "label": "RE100", "url": "https://www.there100.org/our-work/news/blog-our-journey-100-renewable-electricity-infosys-leading-corporate-sourcing-india" }
+    },
+    {
+      "id": "tatamotors", "name": { "zh": "塔塔汽車 Tata Motors", "en": "Tata Motors" }, "industry": "auto", "region": "IN",
+      "electricityTWh": null, "electricityYear": null,
+      "renewablePct": 16.25, "renewableYear": 2021,
+      "cppa": { "zh": "印度最大汽車製造商、第二家加入 RE100 的印度企業", "en": "India's largest automaker and the second Indian company to join RE100" },
+      "target": { "zh": "RE100：2030 年 100% 再生電力", "en": "RE100: 100% renewable electricity by 2030" },
+      "source": { "label": "RE100", "url": "https://www.there100.org/our-work/news/tata-motors-limited-joins-re100-drive-100-renewable-power-news" }
+    },
+    {
       "id": "posco", "name": { "zh": "浦項鋼鐵 POSCO", "en": "POSCO" }, "industry": "steel", "region": "KR",
       "electricityTWh": null, "electricityYear": null,
       "renewablePct": null, "renewableYear": null,
