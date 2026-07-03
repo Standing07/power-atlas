@@ -27,6 +27,15 @@ export default function Companies() {
         <p className="mt-2 max-w-2xl text-sm text-stone-500">{t('companies_subtitle')}</p>
       </header>
 
+      {/* 高盛視角：全球綠電採購（offtaker）市場輪廓 */}
+      <div className="rounded-3xl border-2 border-brand-100 bg-brand-50/50 p-5">
+        <h2 className="font-bold text-brand-700">🌍 {t('offtakers_title')}</h2>
+        <p className="mt-2 text-sm leading-relaxed text-stone-700">{t('offtakers_body')}</p>
+        <a href="https://about.bnef.com/insights/clean-energy/corporate-clean-energy-buying-fell-in-2025-after-nearly-a-decade-of-growth/" target="_blank" rel="noreferrer" className="mt-2 inline-block text-xs text-brand-600 hover:underline">
+          {t('source_label')}：BloombergNEF ↗
+        </a>
+      </div>
+
       <div className="flex flex-wrap gap-1.5">
         {INDUSTRIES.map((i) => (
           <button

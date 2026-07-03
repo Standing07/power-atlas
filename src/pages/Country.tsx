@@ -12,6 +12,7 @@ import { pick, type Lang } from '../i18n'
 import insightsData from '../data/country-insights.json'
 import sectorData from '../data/sector-breakdown.json'
 import outlookData from '../data/outlook.json'
+import consumersData from '../data/major-consumers.json'
 import CountrySelect from '../components/CountrySelect'
 
 type L10n = { zh: string; en: string }
@@ -69,13 +70,17 @@ export function CountryView({
   const name = countryName(data.iso2, data.name)
   const world = index.world.latest
 
-  const equivPeople = useMemo(() => {
-    if (latest.generation == null || latest.demandPerCapita == null || latest.demandPerCapita <= 0) return null
-    return (latest.generation * 1e9) / latest.demandPerCapita
-  }, [latest])
-
   const ciRatio =
     latest.carbonIntensity != null && world.carbonIntensity ? latest.carbonIntensity / world.carbonIntensity : null
+
+  // 碳強度全球百分位：這個國家比多少 % 的國家髒（僅比較具規模的電網）
+  const ciPercentile = useMemo(() => {
+    if (latest.carbonIntensity == null) return null
+    const peers = index.countries.filter((c) => c.carbonIntensity != null && (c.generation ?? 0) >= 5)
+    if (peers.length < 20) return null
+    const cleaner = peers.filter((c) => c.carbonIntensity! < latest.carbonIntensity!).length
+    return Math.round((cleaner / peers.length) * 100)
+  }, [index, latest])
 
   return (
     <div className="space-y-10 pt-8">
@@ -113,7 +118,10 @@ export function CountryView({
         <Stat
           label={t('country_carbon_intensity')}
           value={`${fmt(latest.carbonIntensity)} g`}
-          sub={ciRatio != null ? t('vs_world_avg', { x: ciRatio.toFixed(1) }) : undefined}
+          sub={[
+            ciRatio != null ? t('vs_world_avg', { x: ciRatio.toFixed(1) }) : null,
+            ciPercentile != null ? t('ci_percentile', { x: ciPercentile }) : null,
+          ].filter(Boolean).join('・')}
           tip={t('tip_carbonIntensity')}
         />
       </section>
@@ -165,21 +173,9 @@ export function CountryView({
         <TrendArea series={data.series} className="mt-2 h-80 w-full" />
       </section>
 
-      {/* 親民換算 */}
-      {equivPeople != null && (
-        <section className="rounded-3xl bg-brand-50 p-6">
-          <h2 className="font-bold text-brand-700">💡 {t('equiv_title')}</h2>
-          <p className="mt-2 text-sm leading-relaxed text-stone-700">
-            {t('equiv_body', {
-              country: name,
-              gen: fmt((latest.generation ?? 0) * 1e9 / 1e8) + (lang === 'zh' ? ' 億' : '×100M'),
-              people: lang === 'zh' ? `${fmt(equivPeople / 1e4)} 萬` : fmt(equivPeople),
-            })}
-          </p>
-        </section>
-      )}
-
       <SectorSection iso3={data.iso3} />
+
+      <ConsumersSection iso3={data.iso3} />
 
       <OutlookSection iso3={data.iso3} />
 
@@ -218,18 +214,41 @@ function SectorSection({ iso3 }: { iso3: string }) {
   )
 }
 
-/** 未來五年展望：全球預測＋該國專屬預測（如有） */
+/** 未來五年展望：只顯示該國專屬預測（全球趨勢放首頁） */
 function OutlookSection({ iso3 }: { iso3: string }) {
   const { t, lang } = useLang()
-  const countryItems = (outlookData.countries as Record<string, SourcedItem[]>)[iso3] ?? []
-  const items = [...countryItems, ...(outlookData.global as SourcedItem[])]
+  const items = (outlookData.countries as Record<string, SourcedItem[]>)[iso3] ?? []
+  if (!items.length) return null
   return (
     <section>
       <h2 className="text-xl font-bold text-stone-900">🔮 {t('outlook_title')}</h2>
       <p className="mt-1 text-sm text-stone-500">{t('outlook_subtitle')}</p>
       <div className="mt-4 grid gap-3 md:grid-cols-2">
         {items.map((it, i) => (
-          <div key={i} className={`rounded-3xl p-5 ${i < countryItems.length ? 'border-2 border-brand-100 bg-brand-50/50' : 'border border-stone-200 bg-white'} shadow-sm`}>
+          <div key={i} className="rounded-3xl border-2 border-brand-100 bg-brand-50/50 p-5 shadow-sm">
+            <p className="text-sm leading-relaxed text-stone-700">{pick(lang as Lang, it.text)}</p>
+            <a href={it.source.url} target="_blank" rel="noreferrer" className="mt-2 inline-block text-xs text-brand-600 hover:underline">
+              {t('source_label')}：{it.source.label} ↗
+            </a>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+/** 誰用掉最多電：該國用電大戶與成長熱點（有查證資料的國家才顯示） */
+function ConsumersSection({ iso3 }: { iso3: string }) {
+  const { t, lang } = useLang()
+  const items = (consumersData.countries as Record<string, SourcedItem[]>)[iso3] ?? []
+  if (!items.length) return null
+  return (
+    <section>
+      <h2 className="text-xl font-bold text-stone-900">🏭 {t('consumers_title')}</h2>
+      <p className="mt-1 text-sm text-stone-500">{t('consumers_subtitle')}</p>
+      <div className="mt-4 space-y-3">
+        {items.map((it, i) => (
+          <div key={i} className="rounded-3xl border border-stone-200 bg-white p-5 shadow-sm">
             <p className="text-sm leading-relaxed text-stone-700">{pick(lang as Lang, it.text)}</p>
             <a href={it.source.url} target="_blank" rel="noreferrer" className="mt-2 inline-block text-xs text-brand-600 hover:underline">
               {t('source_label')}：{it.source.label} ↗

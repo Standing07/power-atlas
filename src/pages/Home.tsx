@@ -11,6 +11,7 @@ import InfoTip from '../components/InfoTip'
 import { PRIORITY_COUNTRIES } from '../data/priority-countries'
 import cleantech from '../data/cleantech.json'
 import insightsData from '../data/country-insights.json'
+import outlookData from '../data/outlook.json'
 import { fmt } from '../lib/energy'
 
 const MIN_GEN_TWH = 5 // 排行榜只列入具規模的電力系統
@@ -138,6 +139,21 @@ export default function Home() {
         <p className="mt-1 text-sm text-stone-500">{t('insights_subtitle')}</p>
         <div className="mt-4 grid gap-4 md:grid-cols-3">
           {insightsData.global.map((it, i) => (
+            <div key={i} className="rounded-3xl border border-stone-200 bg-white p-5 shadow-sm">
+              <p className="text-sm leading-relaxed text-stone-700">{pick(lang, it.text)}</p>
+              <a href={it.source.url} target="_blank" rel="noreferrer" className="mt-3 inline-block text-xs text-brand-600 hover:underline">
+                {t('source_label')}：{it.source.label} ↗
+              </a>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 未來五年展望（全球） */}
+      <section>
+        <h2 className="text-xl font-bold text-stone-900">🔮 {t('outlook_title')}</h2>
+        <div className="mt-4 grid gap-4 md:grid-cols-2">
+          {outlookData.global.map((it, i) => (
             <div key={i} className="rounded-3xl border border-stone-200 bg-white p-5 shadow-sm">
               <p className="text-sm leading-relaxed text-stone-700">{pick(lang, it.text)}</p>
               <a href={it.source.url} target="_blank" rel="noreferrer" className="mt-3 inline-block text-xs text-brand-600 hover:underline">

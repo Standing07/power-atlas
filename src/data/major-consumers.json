@@ -1,0 +1,32 @@
+{
+  "_comment": "各國用電大戶/需求成長熱點：人工整理，附來源。台灣有專屬聚光燈頁，不在此列。",
+  "countries": {
+    "IRL": [
+      {
+        "text": {
+          "zh": "愛爾蘭是全球資料中心用電佔比最高的國家：資料中心用掉全國 22% 的電（2024，官方統計），已超過全國都市家庭用電總和（18%）；2015 年時佔比僅 5%。",
+          "en": "Ireland has the world's highest data-center electricity share: data centers used 22% of national electricity in 2024 (official statistics) — more than all urban households combined (18%) — up from just 5% in 2015."
+        },
+        "source": { "label": "愛爾蘭中央統計局 CSO（2025）", "url": "https://www.cso.ie/en/releasesandpublications/ep/p-dcmec/datacentresmeteredelectricityconsumption2024/keyfindings/" }
+      }
+    ],
+    "USA": [
+      {
+        "text": {
+          "zh": "資料中心是美國最大的用電成長來源：2023 年約佔全美用電 4%，EIA 預估 2028 年達 7–12%；IEA 估到 2030 年約一半的美國新增用電來自資料中心。",
+          "en": "Data centers are the biggest source of US demand growth: ~4% of US electricity in 2023, projected by the EIA to reach 7–12% by 2028; the IEA expects about half of new US demand through 2030 to come from data centers."
+        },
+        "source": { "label": "EIA / IEA Electricity 2026", "url": "https://www.iea.org/reports/electricity-2026/demand" }
+      }
+    ],
+    "KOR": [
+      {
+        "text": {
+          "zh": "韓國的電力被出口製造業大戶主導：三星電子＋SK 海力士兩家的用電量，就超過全韓國風力＋太陽能的發電總和；前八大出口企業 2020 年合計用電 84.9 TWh（約佔全國 15%）。",
+          "en": "Korea's power use is dominated by big exporters: Samsung Electronics and SK Hynix together use more electricity than all of Korea's wind and solar generate; the eight biggest exporters used 84.9 TWh in 2020 (~15% of national demand)."
+        },
+        "source": { "label": "Ember（2023）", "url": "https://ember-energy.org/latest-insights/south-koreas-lack-of-wind-and-solar-hinders-exporters/" }
+      }
+    ]
+  }
+}

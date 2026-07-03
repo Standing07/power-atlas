@@ -49,7 +49,7 @@
       "id": "amazon", "name": { "zh": "亞馬遜", "en": "Amazon" }, "industry": "tech", "region": "US",
       "electricityTWh": 30.9, "electricityYear": 2021,
       "renewablePct": 85, "renewableYear": 2021,
-      "cppa": { "zh": "全球最大企業綠電採購者：截至 2024 年已宣布逾 500 個專案、超過 20GW 容量", "en": "World's largest corporate clean-power buyer: 500+ projects and 20+ GW announced as of 2024" },
+      "cppa": { "zh": "全球最大企業綠電採購者（BNEF 排名連年第一）：2023 年單年簽約 8.8GW、橫跨 16 國，累計綠電組合達 33.6GW、逾 500 個專案", "en": "World's largest corporate clean-power buyer (BNEF #1 for years running): 8.8 GW signed across 16 countries in 2023 alone, a 33.6 GW cumulative portfolio across 500+ projects" },
       "target": { "zh": "2025 年 100% 再生能源匹配", "en": "100% renewable matching by 2025" },
       "source": { "label": "Global Electricity", "url": "https://www.globalelectricity.org/data-centers-energy-consumption/" }
     },
