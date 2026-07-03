@@ -1,0 +1,45 @@
+{
+  "_comment": "潔淨能源科技大國榜：人工整理，附來源。",
+  "items": [
+    {
+      "id": "china-manufacturing",
+      "flag": "CN",
+      "title": { "zh": "中國 — 潔淨能源設備世界工廠", "en": "China — the world's clean-tech factory" },
+      "body": {
+        "zh": "全球超過 80% 的太陽能板（從多晶矽到模組的每個環節）、約 60% 的風力機、約 80% 的電池芯都在中國製造；主要潔淨科技每個環節的產能佔比都超過 70%，並吸走 2024 年全球 76% 的潔淨科技建廠投資。",
+        "en": "China makes over 80% of the world's solar panels (every step from polysilicon to modules), ~60% of wind turbines and ~80% of battery cells; it holds >70% of capacity in every major clean-tech segment and attracted 76% of global clean-tech factory investment in 2024."
+      },
+      "source": { "label": "IEA / BloombergNEF / Ember 2024–2025", "url": "https://www.iea.org/data-and-statistics/charts/china-s-share-in-global-pv-manufacturing-capacity-2024-and-2030" }
+    },
+    {
+      "id": "taiwan-chips",
+      "flag": "TW",
+      "title": { "zh": "台灣 — 節能晶片的心臟", "en": "Taiwan — the heart of energy-efficient chips" },
+      "body": {
+        "zh": "全球 90% 以上的最先進製程晶片（3–5 奈米）由台積電生產。每一代先進製程都大幅降低單位運算耗電，是全球資料中心、手機與 AI 提升能源效率的關鍵。",
+        "en": "Over 90% of the world's most advanced chips (3–5 nm) are made by TSMC. Each new process node cuts energy per computation sharply — the key to efficiency gains in data centers, phones and AI worldwide."
+      },
+      "source": { "label": "The Conversation / 產業研究 2024–2025", "url": "https://theconversation.com/how-taiwan-came-to-dominate-the-global-chip-industry-276939" }
+    },
+    {
+      "id": "denmark-wind",
+      "flag": "DK",
+      "title": { "zh": "丹麥 — 風電先驅", "en": "Denmark — the wind pioneer" },
+      "body": {
+        "zh": "Vestas 是中國以外最大的風機製造商（2024 年新增 10.2GW、居全球第五，拿下中國以外市場近三分之一）；Ørsted 則開創了現代離岸風電產業。丹麥自身電網的風電佔比也是世界最高之一。",
+        "en": "Vestas is the largest wind-turbine maker outside China (10.2 GW added in 2024, 5th globally, nearly a third of the ex-China market), and Ørsted pioneered the modern offshore wind industry. Denmark's own grid runs on one of the world's highest wind shares."
+      },
+      "source": { "label": "BloombergNEF / GWEC 2025", "url": "https://about.bnef.com/insights/clean-energy/chinese-manufacturers-lead-global-wind-turbine-installations-bloombergnef-report-shows/" }
+    },
+    {
+      "id": "china-wind-oems",
+      "flag": "CN",
+      "title": { "zh": "風機製造版圖翻轉", "en": "The wind-turbine map has flipped" },
+      "body": {
+        "zh": "2024 年全球前四大風機製造商（金風 19.3GW、遠景 14.5GW、運達 12.5GW、明陽 12.2GW）首度全部來自中國——十年前這份榜單還由歐美主導。",
+        "en": "In 2024, for the first time, the world's top four turbine makers (Goldwind 19.3 GW, Envision 14.5 GW, Windey 12.5 GW, Mingyang 12.2 GW) were all Chinese — a list dominated by Western firms just a decade ago."
+      },
+      "source": { "label": "GWEC / Windletter 2025", "url": "https://windinsider.com/2025/05/17/global-wind-installations-hit-record-127-gw-in-2024-led-by-chinese-oems-gwec-report/" }
+    }
+  ]
+}

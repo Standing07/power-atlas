@@ -134,6 +134,20 @@ async function buildGeoJson() {
   const file = await download(ATLAS_URL, 'countries-110m.json', undefined)
   const topo = JSON.parse(await readFile(file, 'utf8'))
   const geo = feature(topo, topo.objects.countries)
+  // 南極洲沒有電網資料，移除以免地圖出現一大塊灰色
+  geo.features = geo.features.filter((f) => f.properties.name !== 'Antarctica')
+  // 修正跨越 180 度經線的圖形（俄羅斯、斐濟）：ECharts 會把 +180→-180 的跳變畫成橫貫地圖的色帶，
+  // 把負經度平移 +360 讓圖形連續
+  for (const f of geo.features) {
+    const lons = []
+    const walk = (c, fn) => (typeof c[0] === 'number' ? fn(c) : c.forEach((x) => walk(x, fn)))
+    walk(f.geometry.coordinates, (pt) => lons.push(pt[0]))
+    if (Math.max(...lons) - Math.min(...lons) > 300) {
+      walk(f.geometry.coordinates, (pt) => {
+        if (pt[0] < 0) pt[0] += 360
+      })
+    }
+  }
   let matched = 0
   for (const f of geo.features) {
     // world-atlas 的 id 是 ISO 3166 數字碼
@@ -227,15 +241,21 @@ function applyIrenaSplit(point, irenaYear, estimated = false) {
   }
 }
 
-function selfSufficiency(r) {
-  const domestic =
-    (r.coal_production ?? 0) + (r.oil_production ?? 0) + (r.gas_production ?? 0) +
-    (r.nuclear_consumption ?? 0) + (r.hydro_consumption ?? 0) + (r.wind_consumption ?? 0) +
-    (r.solar_consumption ?? 0) + (r.biofuel_consumption ?? 0) + (r.other_renewable_consumption ?? 0)
+function selfSufficiency(r, carriedFossil) {
   const total = r.primary_energy_consumption
   if (!total || total <= 0) return null
   const hasProdData = r.coal_production != null || r.oil_production != null || r.gas_production != null
-  if (!hasProdData) return null
+  let fossil = (r.coal_production ?? 0) + (r.oil_production ?? 0) + (r.gas_production ?? 0)
+  if (!hasProdData) {
+    // 化石燃料生產欄位缺漏時：僅在最近已知的化石產量佔比很小（<15%，例如台灣、日本）
+    // 才沿用該小值估算；產能大國（沙烏地等）缺漏則不猜測，回傳 null。
+    if (carriedFossil == null || carriedFossil / total >= 0.15) return null
+    fossil = carriedFossil
+  }
+  const domestic =
+    fossil +
+    (r.nuclear_consumption ?? 0) + (r.hydro_consumption ?? 0) + (r.wind_consumption ?? 0) +
+    (r.solar_consumption ?? 0) + (r.biofuel_consumption ?? 0) + (r.other_renewable_consumption ?? 0)
   return Math.min(domestic / total, 5) // 出口大國可能 >1，上限 5 避免極端值
 }
 
@@ -243,9 +263,13 @@ function buildSeries(owidRows, irena, iso3) {
   const irenaByYear = irena.data.get(iso3)
   // IRENA 資料通常比 Ember 晚 1–2 年；之後的年份沿用最近一年的拆分比例（標記為估計）
   const lastIrenaYear = irenaByYear ? Math.max(...irenaByYear.keys()) : null
+  let carriedFossil = null // 最近一年已知的化石燃料總產量（處理台灣等生產欄位中斷的情況）
   return owidRows
     .filter((r) => r.electricity_generation != null || r.coal_electricity != null)
     .map((r) => {
+      if (r.coal_production != null || r.oil_production != null || r.gas_production != null) {
+        carriedFossil = (r.coal_production ?? 0) + (r.oil_production ?? 0) + (r.gas_production ?? 0)
+      }
       const p = {
         year: r.year,
         generation: round(r.electricity_generation),
@@ -278,7 +302,7 @@ function buildSeries(owidRows, irena, iso3) {
           renewables: round(r.renewables_share_elec, 2),
           fossil: round(r.fossil_share_elec, 2),
         },
-        selfSufficiency: round(selfSufficiency(r), 3),
+        selfSufficiency: round(selfSufficiency(r, carriedFossil), 3),
         fuelTrade: {
           coalProduction: round(r.coal_production, 1),
           coalConsumption: round(r.coal_consumption, 1),

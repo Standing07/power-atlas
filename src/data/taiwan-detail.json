@@ -1,0 +1,151 @@
+{
+  "_comment": "台灣深度資料：人工整理自公開統計，每筆附來源與年份。更新方式見 README。",
+  "year": 2024,
+  "totalConsumptionTWh": 283.35,
+  "totalConsumptionSource": {
+    "label": { "zh": "經濟部能源署，2024 年全國用電量 2,833.5 億度", "en": "Energy Administration, MOEA — 2024 national consumption 283.35 TWh" },
+    "url": "https://www.reccessary.com/zh-tw/news/taiwan-power-consumption-hits-record-high-2024"
+  },
+  "householdAvgKwhPerYear": 4152,
+  "householdSource": {
+    "label": { "zh": "台電：2024 年每戶家庭平均每月用電約 346 度（年約 4,152 度）", "en": "Taipower: 2024 average household usage ≈ 346 kWh/month (≈ 4,152 kWh/year)" },
+    "url": "https://www.taipower.com.tw/2289/2363/2388/2389/10733/normalPost"
+  },
+  "energyImportDependence": {
+    "note": {
+      "zh": "官方統計台灣約 96–97% 能源供給仰賴進口（含核燃料）；本站以 OWID 資料估算的自產比例約 8%，差異來自計算方法（詳見「關於」頁）。",
+      "en": "Official statistics put Taiwan's energy import dependence at ~96–97% (incl. nuclear fuel); this site's OWID-based estimate of domestic production is ~8% — the gap comes from methodology (see About)."
+    }
+  },
+  "sectors": [
+    { "key": "industrial", "label": { "zh": "工業", "en": "Industry" }, "share": 55.56 },
+    { "key": "residential", "label": { "zh": "住宅", "en": "Residential" }, "share": 18.86 },
+    { "key": "services", "label": { "zh": "服務業", "en": "Services" }, "share": 17.66 },
+    { "key": "energySelfUse", "label": { "zh": "能源部門自用", "en": "Energy sector own use" }, "share": 6.04 },
+    { "key": "agriculture", "label": { "zh": "農業", "en": "Agriculture" }, "share": 1.2 },
+    { "key": "transport", "label": { "zh": "運輸", "en": "Transport" }, "share": 0.67 }
+  ],
+  "sectorsSource": {
+    "label": { "zh": "經濟部能源署 2024 年部門別用電統計", "en": "Energy Administration, MOEA — 2024 consumption by sector" },
+    "url": "https://rsprc.ntu.edu.tw/web/research/research_in.jsp?lang=tw&rp_id=RP1741944880461"
+  },
+  "majorConsumers": [
+    {
+      "id": "tsmc",
+      "name": { "zh": "台積電", "en": "TSMC" },
+      "industry": { "zh": "半導體", "en": "Semiconductors" },
+      "electricityTWh": 25.55,
+      "dataYear": 2024,
+      "shareOfTaiwanPct": 9,
+      "note": {
+        "zh": "2024 年用電 255.5 億度、佔全國 9%（2020 年還不到 6%）；其中綠電 36.1 億度（14.1%）。",
+        "en": "Used 25.55 TWh in 2024 — 9% of national consumption (under 6% in 2020); 3.61 TWh (14.1%) was renewable."
+      },
+      "source": { "label": { "zh": "台積電永續報告／自由財經", "en": "TSMC ESG report / Liberty Times" }, "url": "https://ec.ltn.com.tw/article/breakingnews/5192526" }
+    },
+    {
+      "id": "csc",
+      "name": { "zh": "中鋼", "en": "China Steel" },
+      "industry": { "zh": "鋼鐵", "en": "Steel" },
+      "electricityTWh": 5.0,
+      "dataYear": 2021,
+      "shareOfTaiwanPct": 1.8,
+      "note": {
+        "zh": "年用電約 50 億度，其中約 55% 來自廠內汽電共生自發；另設 83.2MW 太陽光電，發電量居製造業第一。",
+        "en": "Uses ≈ 5 TWh/year, ~55% self-supplied by on-site cogeneration; its 83.2 MW of solar leads Taiwan's manufacturing sector."
+      },
+      "source": { "label": { "zh": "經濟日報／Yahoo 股市（2022）", "en": "Economic Daily News / Yahoo Finance (2022)" }, "url": "https://money.udn.com/money/story/5612/6419404/" }
+    },
+    {
+      "id": "fpc",
+      "name": { "zh": "台塑", "en": "Formosa Plastics" },
+      "industry": { "zh": "石化", "en": "Petrochemicals" },
+      "electricityTWh": 2.67,
+      "dataYear": 2021,
+      "shareOfTaiwanPct": 0.9,
+      "note": {
+        "zh": "年購電約 26.7 億度（集團另有大量自備電廠發電，未計入）。",
+        "en": "Purchases ≈ 2.67 TWh/year from the grid (the group also self-generates heavily, not counted here)."
+      },
+      "source": { "label": { "zh": "上下游新聞（2022）", "en": "News & Market (2022)" }, "url": "https://www.newsmarket.com.tw/blog/140974/" }
+    },
+    {
+      "id": "datacenters",
+      "name": { "zh": "資料中心／AI 算力", "en": "Data centers / AI compute" },
+      "industry": { "zh": "數位基礎設施", "en": "Digital infrastructure" },
+      "electricityTWh": null,
+      "dataYear": 2024,
+      "shareOfTaiwanPct": 0.16,
+      "note": {
+        "zh": "2024 年全台 36 座資料中心約佔用電 0.16%，規模尚小但成長極快：台電估 2024–2030 年 AI（含資料中心）新增用電累計約 1.85GW；國科會估 AI 算力中心將從 2026 年 60MW 增至 2029 年 450MW（6.5 倍）。台電已暫緩桃園以北 5MW 以上資料中心的用電申請。",
+        "en": "Taiwan's 36 data centers used ~0.16% of electricity in 2024 — small but growing fast: Taipower expects ~1.85 GW of cumulative new AI/data-center load during 2024–2030, and the NSTC projects AI compute centers to grow from 60 MW (2026) to 450 MW (2029). New data-center connections >5 MW north of Taoyuan are currently on hold."
+      },
+      "source": { "label": { "zh": "報導者／台電（2024–2026）", "en": "The Reporter / Taipower (2024–2026)" }, "url": "https://www.twreporter.org/a/data-center-electricity-demand" }
+    },
+    {
+      "id": "panels",
+      "name": { "zh": "面板業（友達、群創）", "en": "Display panels (AUO, Innolux)" },
+      "industry": { "zh": "面板/顯示器", "en": "Displays" },
+      "electricityTWh": null,
+      "dataYear": 2022,
+      "shareOfTaiwanPct": null,
+      "note": {
+        "zh": "友達與群創同列台灣前 20 大排碳/用電企業（與台積電、聯電、台灣美光並列電子業大戶）；綠色和平調查顯示 2022 年兩者實際再生能源使用比例皆低於 0.2%。",
+        "en": "AUO and Innolux are among Taiwan's top-20 emitters/electricity users (alongside TSMC, UMC and Micron Taiwan); Greenpeace found both used less than 0.2% renewable electricity in 2022."
+      },
+      "source": { "label": { "zh": "綠色和平／CSR@天下（2023）", "en": "Greenpeace / CommonWealth CSR (2023)" }, "url": "https://csr.cw.com.tw/article/43614" }
+    },
+    {
+      "id": "cht",
+      "name": { "zh": "中華電信", "en": "Chunghwa Telecom" },
+      "industry": { "zh": "電信/資料中心", "en": "Telecom / data centers" },
+      "electricityTWh": 1.4,
+      "dataYear": 2022,
+      "shareOfTaiwanPct": 0.5,
+      "note": {
+        "zh": "年用電超過 14 億度，來自全台 900 多處機房與超過 5 萬座行動基地台；已加入 RE100（2040 年 100% 綠電），再生能源使用率從 2021 年 0.01% 提升至 2024 年 5.2%。",
+        "en": "Uses over 1.4 TWh/year across 900+ facilities and 50,000+ mobile base stations; an RE100 member (100% by 2040), lifting renewables from 0.01% (2021) to 5.2% (2024)."
+      },
+      "source": { "label": { "zh": "中華電信（2022–2025）", "en": "Chunghwa Telecom (2022–2025)" }, "url": "https://www.cht.com.tw/zh-tw/home/cht/messages/2022/0812-1200" }
+    },
+    {
+      "id": "rail",
+      "name": { "zh": "軌道運輸（高鐵＋捷運＋台鐵）", "en": "Rail transit (HSR + metro + TRA)" },
+      "industry": { "zh": "交通運輸", "en": "Transport" },
+      "electricityTWh": 1.23,
+      "dataYear": 2013,
+      "shareOfTaiwanPct": 0.5,
+      "note": {
+        "zh": "全台軌道運輸一年用電約 12.3 億度、僅佔全台約 0.5%（2013 年統計，量級參考）——比單一面板廠或電信公司還少，是高效率的大眾運輸。",
+        "en": "All rail transit in Taiwan uses ≈ 1.23 TWh/year — only ~0.5% of national electricity (2013 figure, order-of-magnitude) — less than a single panel maker or telecom operator; mass transit is remarkably efficient."
+      },
+      "source": { "label": { "zh": "低碳生活部落格（台達基金會，2013）", "en": "Delta Foundation Low-Carbon Life Blog (2013)" }, "url": "https://lowestc.blogspot.com/2013/12/05.html" }
+    },
+    {
+      "id": "top20",
+      "name": { "zh": "前 20 大排碳/用電企業（百工百業）", "en": "Top-20 emitters / electricity users (all industries)" },
+      "industry": { "zh": "彙總", "en": "Aggregate" },
+      "electricityTWh": null,
+      "dataYear": 2022,
+      "shareOfTaiwanPct": null,
+      "note": {
+        "zh": "綠色和平盤點的台灣前 20 大排碳企業橫跨：半導體（台積電、聯電、台灣美光）、面板（群創、友達）、石化（台塑化、台塑、台化、南亞、中油、長春石化、中石化、大連化工）、鋼鐵（中鋼、中龍）、水泥（台泥、亞泥）、造紙（正隆、榮成）。除台積電外，多數企業的綠電使用比例仍極低。",
+        "en": "Greenpeace's top-20 emitter list spans semiconductors (TSMC, UMC, Micron Taiwan), panels (Innolux, AUO), petrochemicals (Formosa Petrochemical, FPC, FCFC, Nan Ya, CPC, Chang Chun, CPDC, Dairen), steel (China Steel, Dragon Steel), cement (TCC, Asia Cement) and paper (Cheng Loong, Long Chen). Outside TSMC, most still use very little renewable power."
+      },
+      "source": { "label": { "zh": "綠色和平／CSR@天下（2023）", "en": "Greenpeace / CommonWealth CSR (2023)" }, "url": "https://csr.cw.com.tw/article/43614" }
+    },
+    {
+      "id": "bigusers",
+      "name": { "zh": "全部用電大戶（>5,000kW）", "en": "All large users (>5,000 kW)" },
+      "industry": { "zh": "彙總", "en": "Aggregate" },
+      "electricityTWh": null,
+      "dataYear": 2021,
+      "shareOfTaiwanPct": 35,
+      "note": {
+        "zh": "契約容量超過 5,000kW 的 506 家用電大戶，合計使用全台約 35% 的電力。",
+        "en": "Taiwan's 506 large users with contracted capacity above 5,000 kW together consume about 35% of national electricity."
+      },
+      "source": { "label": { "zh": "上下游新聞（2021）", "en": "News & Market (2021)" }, "url": "https://www.newsmarket.com.tw/blog/133907/" }
+    }
+  ]
+}

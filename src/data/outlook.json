@@ -1,0 +1,48 @@
+{
+  "_comment": "未來五年展望：人工整理自 IEA Electricity 2026、Ember 等權威預測，附來源。",
+  "global": [
+    {
+      "text": {
+        "zh": "IEA 預測 2026–2030 年全球用電量每年成長約 3.6%——從 2025 年的 28,200 TWh 增至 2030 年的 33,600 TWh，等於每年新增約 1,100 TWh（過去十年平均僅 700 TWh）。主要動力：產業電氣化、電動車、空調、資料中心。",
+        "en": "The IEA projects global electricity demand to grow ~3.6% a year over 2026–2030 — from 28,200 TWh (2025) to 33,600 TWh (2030), adding ~1,100 TWh a year (vs. 700 TWh/yr over the past decade). Key drivers: industrial electrification, EVs, air conditioning and data centers."
+      },
+      "source": { "label": "IEA Electricity 2026", "url": "https://www.iea.org/reports/electricity-2026/executive-summary" }
+    },
+    {
+      "text": {
+        "zh": "供給端：太陽能與風力預計 2026 年雙雙超越核能，成長幾乎全由潔淨電力滿足；先進經濟體到 2030 年約四分之一的新增需求將來自資料中心。",
+        "en": "On the supply side, solar and wind are both expected to overtake nuclear in 2026, with clean power meeting nearly all growth; in advanced economies about a quarter of demand growth to 2030 will come from data centers."
+      },
+      "source": { "label": "Ember / IEA", "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/" }
+    }
+  ],
+  "countries": {
+    "USA": [
+      {
+        "text": {
+          "zh": "IEA 預測美國用電量到 2030 年每年成長近 2%，其中約一半來自資料中心擴張；資料中心佔全美用電將從 2023 年的 4% 升至 2028 年的 7–12%。",
+          "en": "The IEA projects US demand to grow nearly 2% a year through 2030, with about half of the increase from data-center expansion; data centers' share of US electricity is set to rise from 4% (2023) to 7–12% by 2028."
+        },
+        "source": { "label": "IEA Electricity 2026 / EIA", "url": "https://www.iea.org/reports/electricity-2026/demand" }
+      }
+    ],
+    "CHN": [
+      {
+        "text": {
+          "zh": "GlobalData 預測中國用電量到 2030 年將以每年約 6.3% 成長；同時潔淨電力成長已開始追上需求（2025 年化石發電十年來首度下降）。",
+          "en": "GlobalData projects China's power consumption to grow ~6.3% a year to 2030 — while clean generation is starting to outpace demand (fossil generation fell in 2025 for the first time in a decade)."
+        },
+        "source": { "label": "GlobalData / Ember", "url": "https://www.meed.com/chinas-electricity-power-consumption-to-grow-at-63-till-2030" }
+      }
+    ],
+    "TWN": [
+      {
+        "text": {
+          "zh": "台電估計 2024–2030 年 AI（含資料中心）將累計新增約 1.85GW 用電；國科會預估 AI 算力中心從 2026 年 60MW 增至 2029 年 450MW（6.5 倍）。半導體先進製程擴廠是另一大成長動力。",
+          "en": "Taipower expects ~1.85 GW of cumulative new AI/data-center load during 2024–2030; the NSTC projects AI compute centers to grow from 60 MW (2026) to 450 MW (2029). Advanced-node fab expansion is the other major driver."
+        },
+        "source": { "label": "報導者 / 台電 / 國科會", "url": "https://www.twreporter.org/a/data-center-electricity-demand" }
+      }
+    ]
+  }
+}

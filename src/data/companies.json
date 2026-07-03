@@ -1,0 +1,121 @@
+{
+  "_comment": "企業綠電/CPPA 卡片：人工整理自公開永續報告與新聞，每筆附來源與年份。各公司年份與口徑可能不同。",
+  "disclaimer": {
+    "zh": "以下資料整理自各公司公開永續報告、RE100 與媒體報導；年份與統計口徑可能不同，僅供大眾理解參考。",
+    "en": "Compiled from public sustainability reports, RE100 and media coverage; years and methodologies vary between companies. For general reference only."
+  },
+  "companies": [
+    {
+      "id": "tsmc", "name": { "zh": "台積電", "en": "TSMC" }, "industry": "semiconductor", "region": "TW",
+      "electricityTWh": 25.55, "electricityYear": 2024,
+      "renewablePct": 14.1, "renewableYear": 2024,
+      "cppa": { "zh": "累計簽訂 4.4GW 再生能源購電契約（CPPA），為台灣最大企業綠電買家", "en": "4.4 GW of cumulative renewable PPAs — Taiwan's largest corporate clean-power buyer" },
+      "target": { "zh": "RE100：2030 年 60%、2040 年 100% 再生能源", "en": "RE100: 60% renewable by 2030, 100% by 2040" },
+      "source": { "label": "自由財經 2025", "url": "https://ec.ltn.com.tw/article/breakingnews/5192526" }
+    },
+    {
+      "id": "umc", "name": { "zh": "聯電", "en": "UMC" }, "industry": "semiconductor", "region": "TW",
+      "electricityTWh": null, "electricityYear": null,
+      "renewablePct": 16, "renewableYear": 2024,
+      "cppa": { "zh": "在台簽訂 181MWp 再生能源購電契約，2024 年起供電", "en": "181 MWp of renewable PPAs in Taiwan, supplying since 2024" },
+      "target": { "zh": "RE100：2025 年 25%、2030 年 50%、2050 年 100%", "en": "RE100: 25% by 2025, 50% by 2030, 100% by 2050" },
+      "source": { "label": "鉅亨網 2025", "url": "https://news.cnyes.com/news/id/5661905" }
+    },
+    {
+      "id": "google", "name": { "zh": "Google", "en": "Google" }, "industry": "tech", "region": "US",
+      "electricityTWh": 30.8, "electricityYear": 2024,
+      "renewablePct": 100, "renewableYear": 2024,
+      "cppa": { "zh": "自 2017 年起以綠電採購 100% 匹配年度用電；2024 年以「全天候無碳電力（24/7 CFE）」衡量則為 66%", "en": "Matches 100% of annual usage with renewables since 2017; measured as 24/7 carbon-free energy, 66% in 2024" },
+      "target": { "zh": "2030 年達成 24/7 全天候無碳電力", "en": "24/7 carbon-free energy by 2030" },
+      "source": { "label": "RTO Insider / TechCrunch 2025", "url": "https://www.rtoinsider.com/109458-google-data-center-electricity-consumption-up-2024/" }
+    },
+    {
+      "id": "microsoft", "name": { "zh": "微軟", "en": "Microsoft" }, "industry": "tech", "region": "US",
+      "electricityTWh": null, "electricityYear": null,
+      "renewablePct": 100, "renewableYear": 2021,
+      "cppa": { "zh": "自 2021 年起以綠電採購 100% 匹配用電；AI 需求使近年用電量連年成長逾 25%", "en": "Has matched 100% of usage with renewable purchases since 2021; AI demand is growing its usage >25% per year" },
+      "target": { "zh": "2030 年 100/100/0（每時每地無碳電力）", "en": "100/100/0 (zero-carbon power every hour, everywhere) by 2030" },
+      "source": { "label": "Yahoo Finance / Global Electricity", "url": "https://www.globalelectricity.org/data-centers-energy-consumption/" }
+    },
+    {
+      "id": "meta", "name": { "zh": "Meta", "en": "Meta" }, "industry": "tech", "region": "US",
+      "electricityTWh": null, "electricityYear": null,
+      "renewablePct": 100, "renewableYear": 2021,
+      "cppa": { "zh": "以大量 CPPA 支持 100% 綠電匹配（主要用於資料中心）", "en": "Maintains 100% renewable matching through large CPPAs (mostly for data centers)" },
+      "target": { "zh": "維持 100% 再生能源匹配", "en": "Maintain 100% renewable matching" },
+      "source": { "label": "Global Electricity", "url": "https://www.globalelectricity.org/data-centers-energy-consumption/" }
+    },
+    {
+      "id": "amazon", "name": { "zh": "亞馬遜", "en": "Amazon" }, "industry": "tech", "region": "US",
+      "electricityTWh": 30.9, "electricityYear": 2021,
+      "renewablePct": 85, "renewableYear": 2021,
+      "cppa": { "zh": "全球最大企業綠電採購者：截至 2024 年已宣布逾 500 個專案、超過 20GW 容量", "en": "World's largest corporate clean-power buyer: 500+ projects and 20+ GW announced as of 2024" },
+      "target": { "zh": "2025 年 100% 再生能源匹配", "en": "100% renewable matching by 2025" },
+      "source": { "label": "Global Electricity", "url": "https://www.globalelectricity.org/data-centers-energy-consumption/" }
+    },
+    {
+      "id": "apple", "name": { "zh": "蘋果", "en": "Apple" }, "industry": "tech", "region": "US",
+      "electricityTWh": null, "electricityYear": null,
+      "renewablePct": 100, "renewableYear": 2018,
+      "cppa": { "zh": "自營據點（43 國的資料中心、門市、辦公室）100% 使用再生能源，並推動供應鏈轉綠電", "en": "Own operations (data centers, stores, offices in 43 countries) run on 100% renewables; pushing its supply chain to follow" },
+      "target": { "zh": "2030 年全供應鏈與產品生命週期碳中和", "en": "Carbon-neutral supply chain and products by 2030" },
+      "source": { "label": "RE100", "url": "https://www.there100.org/our-work/news/apple-hits-re100-target-all-global-facilities-now-run-100-renewable-electricity-news" }
+    },
+    {
+      "id": "samsung", "name": { "zh": "三星電子", "en": "Samsung Electronics" }, "industry": "semiconductor", "region": "KR",
+      "electricityTWh": null, "electricityYear": null,
+      "renewablePct": 31.4, "renewableYear": 2024,
+      "cppa": { "zh": "2024 年再生能源使用 10,069 GWh；消費電子（DX）部門已達 93.4%，但耗電最大的半導體（DS）部門僅 24.8%——受限於韓國綠電市場", "en": "Used 10,069 GWh of renewables in 2024; its consumer (DX) division is at 93.4%, but the power-hungry semiconductor (DS) division only 24.8%, constrained by Korea's green-power market" },
+      "target": { "zh": "RE100：2050 年全球營運 100% 再生能源", "en": "RE100: 100% renewables across global operations by 2050" },
+      "source": { "label": "Samsung 2025 永續報告", "url": "https://news.samsung.com/global/samsung-electronics-releases-2025-sustainability-report" }
+    },
+    {
+      "id": "intel", "name": { "zh": "英特爾", "en": "Intel" }, "industry": "semiconductor", "region": "US",
+      "electricityTWh": null, "electricityYear": null,
+      "renewablePct": null, "renewableYear": null,
+      "cppa": { "zh": "RE100 高績效成員；再生電力主要透過再生能源憑證（EAC）採購（約 97%）", "en": "High-performing RE100 member; ~97% of its renewable electricity is procured via energy attribute certificates (EACs)" },
+      "target": { "zh": "2030 年全球營運 100% 再生電力", "en": "100% renewable electricity across global operations by 2030" },
+      "source": { "label": "RE100 2024 年報", "url": "https://monsooncarbon.com/key-insights-from-the-2024-re100-annual-report/" }
+    },
+    {
+      "id": "cht", "name": { "zh": "中華電信", "en": "Chunghwa Telecom" }, "industry": "telecom", "region": "TW",
+      "electricityTWh": 1.4, "electricityYear": 2022,
+      "renewablePct": 5.2, "renewableYear": 2024,
+      "cppa": { "zh": "自建 340MW 太陽光電（50+ 處）並持續擴大綠電採購（2023 年估逾 6,000 萬度）", "en": "340 MW of own solar across 50+ sites, with growing procurement (est. 60+ GWh in 2023)" },
+      "target": { "zh": "RE100：2040 年 100% 再生能源（台灣電信業首家）", "en": "RE100: 100% renewables by 2040 (first Taiwanese telecom)" },
+      "source": { "label": "中華電信 2022–2025", "url": "https://www.cht.com.tw/zh-tw/home/cht/messages/2022/0812-1200" }
+    },
+    {
+      "id": "csc", "name": { "zh": "中鋼", "en": "China Steel" }, "industry": "steel", "region": "TW",
+      "electricityTWh": 5.0, "electricityYear": 2021,
+      "renewablePct": null, "renewableYear": null,
+      "cppa": { "zh": "約 55% 用電由廠內汽電共生自發；設置 83.2MW 太陽光電，發電量居台灣製造業第一", "en": "~55% of usage self-supplied by on-site cogeneration; its 83.2 MW of solar leads Taiwan's manufacturing sector" },
+      "target": { "zh": "2050 碳中和路徑（高爐減碳＋氫能冶金研發）", "en": "2050 carbon-neutral roadmap (blast-furnace abatement + hydrogen metallurgy R&D)" },
+      "source": { "label": "經濟日報 2022", "url": "https://money.udn.com/money/story/5612/6419404/" }
+    },
+    {
+      "id": "fpc", "name": { "zh": "台塑", "en": "Formosa Plastics" }, "industry": "petrochemical", "region": "TW",
+      "electricityTWh": 2.67, "electricityYear": 2021,
+      "renewablePct": null, "renewableYear": null,
+      "cppa": { "zh": "上表為向台電購電量（集團另有六輕等大型自備電廠，自發電未計入）；環團調查其設置的再生能源多以賣電為主、幾乎不自用", "en": "Figure above is grid purchases only (the group also self-generates heavily at Mailiao); NGOs found its renewable installations mostly sell power rather than supply its own use" },
+      "target": { "zh": "集團 2050 碳中和目標", "en": "Group carbon-neutrality target for 2050" },
+      "source": { "label": "上下游新聞 2022", "url": "https://www.newsmarket.com.tw/blog/140974/" }
+    },
+    {
+      "id": "posco", "name": { "zh": "浦項鋼鐵 POSCO", "en": "POSCO" }, "industry": "steel", "region": "KR",
+      "electricityTWh": null, "electricityYear": null,
+      "renewablePct": null, "renewableYear": null,
+      "cppa": { "zh": "2024 年動工年產 250 萬噸的電弧爐（比高爐減碳最多 75%），走「以電代煤」路線", "en": "Broke ground in 2024 on a 2.5 Mt/yr electric-arc furnace (up to 75% less CO2 than blast furnaces) — electrifying steelmaking" },
+      "target": { "zh": "2030 年量產綠色鋼材、2050 碳中和（HyREX 氫還原煉鐵）", "en": "Green steel at scale by 2030, carbon-neutral by 2050 (HyREX hydrogen reduction)" },
+      "source": { "label": "POSCO Newsroom / GMK 2024", "url": "https://newsroom.posco.com/en/great-conversion-to-low-carbon-eco-friendly-steelmaking-process-%E2%91%A1-green-energy/" }
+    },
+    {
+      "id": "arcelormittal", "name": { "zh": "安賽樂米塔爾", "en": "ArcelorMittal" }, "industry": "steel", "region": "EU",
+      "electricityTWh": null, "electricityYear": null,
+      "renewablePct": null, "renewableYear": null,
+      "cppa": { "zh": "與 Ørsted 合作規劃荷蘭 2GW 離岸風場，供應鋼廠低碳電力", "en": "Planning a 2 GW offshore wind park in the Netherlands with Ørsted to power low-carbon steelmaking" },
+      "target": { "zh": "2050 淨零（歐洲 2030 減碳 35%）", "en": "Net-zero by 2050 (35% CO2 cut in Europe by 2030)" },
+      "source": { "label": "POSCO Newsroom (industry roundup) 2024", "url": "https://newsroom.posco.com/en/great-conversion-to-low-carbon-eco-friendly-steelmaking-process-%E2%91%A1-green-energy/" }
+    }
+  ]
+}

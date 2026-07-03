@@ -1,0 +1,68 @@
+{
+  "_comment": "各國/全球「電流向哪裡」部門用電佔比：人工整理自官方統計，逐筆附來源年份。新增國家：加一個 key 即自動顯示於該國頁面。",
+  "WORLD": {
+    "year": 2022,
+    "sectors": [
+      { "label": { "zh": "工業", "en": "Industry" }, "share": 42.2 },
+      { "label": { "zh": "住宅", "en": "Residential" }, "share": 26.8 },
+      { "label": { "zh": "商業與公共服務", "en": "Commercial & public services" }, "share": 21.1 },
+      { "label": { "zh": "運輸", "en": "Transport" }, "share": 1.8 },
+      { "label": { "zh": "其他", "en": "Other" }, "share": 8.1 }
+    ],
+    "source": { "label": { "zh": "IEA／Statista（2022）", "en": "IEA / Statista (2022)" }, "url": "https://www.statista.com/statistics/859150/world-electricity-consumption-share-by-sector/" }
+  },
+  "TWN": {
+    "year": 2024,
+    "sectors": [
+      { "label": { "zh": "工業", "en": "Industry" }, "share": 55.56 },
+      { "label": { "zh": "住宅", "en": "Residential" }, "share": 18.86 },
+      { "label": { "zh": "服務業", "en": "Services" }, "share": 17.66 },
+      { "label": { "zh": "能源部門自用", "en": "Energy sector own use" }, "share": 6.04 },
+      { "label": { "zh": "農業", "en": "Agriculture" }, "share": 1.2 },
+      { "label": { "zh": "運輸", "en": "Transport" }, "share": 0.67 }
+    ],
+    "source": { "label": { "zh": "經濟部能源署（2024）", "en": "Energy Administration, MOEA (2024)" }, "url": "https://rsprc.ntu.edu.tw/web/research/research_in.jsp?lang=tw&rp_id=RP1741944880461" }
+  },
+  "USA": {
+    "year": 2025,
+    "sectors": [
+      { "label": { "zh": "住宅", "en": "Residential" }, "share": 37.3 },
+      { "label": { "zh": "商業（含資料中心）", "en": "Commercial (incl. data centers)" }, "share": 36.8 },
+      { "label": { "zh": "工業", "en": "Industry" }, "share": 25.7 },
+      { "label": { "zh": "運輸", "en": "Transport" }, "share": 0.2 }
+    ],
+    "note": { "zh": "資料中心 2023 年約佔全美用電 4%，預估 2028 年達 7–12%；商業部門用電預計 2026 年起首度超越住宅。", "en": "Data centers used ~4% of US electricity in 2023, projected to reach 7–12% by 2028; commercial sales are set to overtake residential from 2026." },
+    "source": { "label": { "zh": "美國能源資訊署 EIA（2025）", "en": "US EIA (2025)" }, "url": "https://www.eia.gov/energyexplained/electricity/use-of-electricity.php" }
+  },
+  "CHN": {
+    "year": 2024,
+    "sectors": [
+      { "label": { "zh": "工業", "en": "Industry" }, "share": 67 },
+      { "label": { "zh": "住宅", "en": "Residential" }, "share": 15.6 },
+      { "label": { "zh": "商業", "en": "Commercial" }, "share": 4.4 },
+      { "label": { "zh": "運輸", "en": "Transport" }, "share": 2.3 },
+      { "label": { "zh": "其他", "en": "Other" }, "share": 10.7 }
+    ],
+    "source": { "label": { "zh": "GlobalData／Power Technology（2024）", "en": "GlobalData / Power Technology (2024)" }, "url": "https://www.power-technology.com/analyst-comment/china-electricity-consumption-outpace-gdp-growth/" }
+  },
+  "IND": {
+    "year": 2024,
+    "sectors": [
+      { "label": { "zh": "工業", "en": "Industry" }, "share": 41.8 },
+      { "label": { "zh": "住宅", "en": "Domestic" }, "share": 24.3 },
+      { "label": { "zh": "農業（灌溉抽水）", "en": "Agriculture (irrigation pumping)" }, "share": 17 },
+      { "label": { "zh": "商業", "en": "Commercial" }, "share": 8.3 },
+      { "label": { "zh": "其他（供水/軌道/路燈等）", "en": "Other (water, traction, lighting)" }, "share": 8.6 }
+    ],
+    "source": { "label": { "zh": "印度中央電力局 CEA（FY2023–24）", "en": "Central Electricity Authority, India (FY2023–24)" }, "url": "https://www.statista.com/statistics/1130112/india-electricity-consumption-share-by-sector/" }
+  },
+  "DEU": {
+    "year": 2022,
+    "sectors": [
+      { "label": { "zh": "工業", "en": "Industry" }, "share": 45.8 },
+      { "label": { "zh": "商業與服務", "en": "Commercial & services" }, "share": 28.9 },
+      { "label": { "zh": "住宅", "en": "Households" }, "share": 25.3 }
+    ],
+    "source": { "label": { "zh": "Enerdata／WorldAtlas（約 2022）", "en": "Enerdata / WorldAtlas (c. 2022)" }, "url": "https://www.worldatlas.com/industries/electricity-consumption-by-country.html" }
+  }
+}
