@@ -1,4 +1,8 @@
 import { useLang } from '../i18n'
+import taiwanDetail from '../data/taiwan-detail.json'
+
+const householdMonthly = Math.round(taiwanDetail.householdAvgKwhPerYear / 12).toLocaleString()
+const householdYearly = taiwanDetail.householdAvgKwhPerYear.toLocaleString()
 
 const content = {
   zh: {
@@ -10,19 +14,19 @@ const content = {
     methods: [
       ['各國發電結構、碳強度、用電量', 'Our World in Data（OWID）energy dataset，底層來源為 Ember 與 Energy Institute，涵蓋 1985 年至今、215 個國家/地區，每月由自動化管線更新並經驗證關卡把關。'],
       ['地熱、離岸/陸域風電拆分', 'IRENA（國際再生能源總署）統計。IRENA 年份較 Ember 晚一至兩年時，較新年份沿用最近一年的拆分「比例」估計，圖上會標註。'],
-      ['能源自給率', '以 OWID 資料估算：本國生產能源（煤、油、氣＋核能與再生能源）÷ 一次能源總消費（替代法）。與各國官方數字可能有差異——例如台灣官方（能源署）以進口能源占能源供給計算約 96–97%（核燃料視為進口），本站估算的自產比例約 8%，兩者口徑不同但結論一致：台灣能源高度依賴進口。'],
+      ['能源自給率', '以 OWID 資料估算：本國生產能源（煤、油、氣＋核能與再生能源）÷ 一次能源總消費（替代法）。與各國官方數字可能有差異——例如台灣官方（能源署）以進口能源占能源供給計算約 96–97%（核燃料視為進口），本站用替代法估算出的自產比例低了不少（實際數字見台灣頁「能源身分證」區塊，會隨資料更新變動），但兩者口徑不同、結論一致：台灣能源高度依賴進口。'],
       ['台灣部門用電與用電大戶、企業綠電', '人工整理自經濟部能源署、台電、各公司永續報告、RE100 與媒體報導，每筆資料都標註來源與年份。'],
       ['地圖圖資', 'Natural Earth（world-atlas）。台灣以獨立圖徵呈現；本站尊重各地區的主體性。'],
     ],
     glossaryTitle: '名詞小辭典',
     glossary: [
       ['度（kWh）／ TWh', '「一度電」= 1 kWh，大約可以讓冷氣吹一小時。1 TWh = 10 億度。'],
-      ['碳強度', '每發一度電平均排放多少克 CO₂。法國（核能為主）約 50，台灣（化石為主）約 500。'],
+      ['碳強度', '每發一度電平均排放多少克 CO₂。越低越乾淨：以核能、水力為主的國家通常最低（如法國），以燃煤為主的國家通常最高。各國最新實際數值請見該國頁面，會隨資料每月更新而變動。'],
       ['低碳電力', '再生能源（水力、風力、太陽能、地熱、生質能）＋核能。'],
       ['CPPA（企業購電契約）', '企業直接與綠電電廠簽訂長期購電合約，是大企業取得綠電的主要方式，也幫新電廠取得融資。'],
       ['RE100', '全球再生能源倡議，成員企業承諾在目標年前 100% 使用再生電力。'],
       ['容量因子', '電廠實際發電量佔理論最大發電量的比例。太陽能約 15–25%、離岸風電約 40–50%、核能可達 90%。'],
-      ['家庭用電換算', '本站台灣頁以台電 2024 年統計「每戶每月平均約 346 度（年約 4,152 度）」為換算基準。'],
+      ['家庭用電換算', `本站台灣頁以台電最新統計「每戶每月平均約 ${householdMonthly} 度（年約 ${householdYearly} 度）」為換算基準，數字取自 taiwan-detail.json，與台灣頁同步更新。`],
     ],
     apiTitle: '開放資料 API',
     apiIntro: '本站所有資料都是靜態 JSON 檔，部署後即為免費開放 API，歡迎直接串接（CC BY 4.0，請標註來源）：',
@@ -48,19 +52,19 @@ const content = {
     methods: [
       ['Country generation mix, carbon intensity, demand', 'Our World in Data (OWID) energy dataset, built on Ember and the Energy Institute. Covers 215 countries/areas since 1985, refreshed monthly by an automated, validated pipeline.'],
       ['Geothermal and onshore/offshore wind split', 'IRENA statistics. Where IRENA lags Ember by a year or two, the most recent split ratio is carried forward as an estimate (marked on charts).'],
-      ['Energy self-sufficiency', 'Estimated from OWID data: domestic energy production (coal, oil, gas + nuclear and renewables) ÷ total primary energy consumption (substitution method). May differ from official national figures — e.g. Taiwan officially reports ~96–97% import dependence (counting nuclear fuel as imported) while our estimate of domestic production is ~8%; different methods, same conclusion.'],
+      ['Energy self-sufficiency', 'Estimated from OWID data: domestic energy production (coal, oil, gas + nuclear and renewables) ÷ total primary energy consumption (substitution method). May differ from official national figures — e.g. Taiwan officially reports ~96–97% import dependence (counting nuclear fuel as imported), while our substitution-method estimate of domestic production is considerably lower (see the live figure on Taiwan’s "Energy ID card" section, which shifts as data refreshes); different methods, same conclusion.'],
       ['Taiwan sector/company data, corporate clean power', 'Hand-compiled from Taiwan’s Energy Administration, Taipower, corporate sustainability reports, RE100 and media coverage — every figure carries its source and year.'],
       ['Map', 'Natural Earth (world-atlas). Taiwan is shown as its own feature; we respect the identity of every region.'],
     ],
     glossaryTitle: 'Glossary',
     glossary: [
       ['kWh / TWh', 'One kWh runs an air conditioner for about an hour. 1 TWh = 1 billion kWh.'],
-      ['Carbon intensity', 'Grams of CO₂ per kWh generated. France (mostly nuclear) ≈ 50; Taiwan (mostly fossil) ≈ 500.'],
+      ['Carbon intensity', 'Grams of CO₂ per kWh generated. Lower is cleaner: countries running mostly on nuclear or hydro (e.g. France) tend to be lowest; coal-heavy grids tend to be highest. See each country’s page for its latest actual value — it shifts as data is refreshed monthly.'],
       ['Low-carbon electricity', 'Renewables (hydro, wind, solar, geothermal, bioenergy) plus nuclear.'],
       ['CPPA', 'Corporate Power Purchase Agreement — a long-term contract to buy power directly from a clean-energy plant; how big companies mainly source renewables, and how new plants get financed.'],
       ['RE100', 'A global initiative whose members commit to 100% renewable electricity by a target year.'],
       ['Capacity factor', 'Actual output as a share of theoretical maximum. Solar ≈ 15–25%, offshore wind ≈ 40–50%, nuclear up to 90%.'],
-      ['Household conversion', 'The Taiwan page converts using Taipower’s 2024 average of ~346 kWh per household per month (≈ 4,152 kWh/yr).'],
+      ['Household conversion', `The Taiwan page converts using Taipower's latest average of ~${householdMonthly} kWh per household per month (≈ ${householdYearly} kWh/yr), sourced from taiwan-detail.json and kept in sync with the Taiwan page.`],
     ],
     apiTitle: 'Open data API',
     apiIntro: 'All site data is static JSON — once deployed it doubles as a free open API (CC BY 4.0, attribution required):',
