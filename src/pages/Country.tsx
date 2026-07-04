@@ -123,7 +123,10 @@ export function CountryView({
             ciRatio != null ? t('vs_world_avg', { x: ciRatio.toFixed(1) }) : null,
             ciPercentile != null ? t('ci_percentile', { x: ciPercentile }) : null,
           ].filter(Boolean).join('・')}
-          tip={t('tip_carbonIntensity')}
+          tip={t('tip_carbonIntensity', {
+            world: fmt(world.carbonIntensity),
+            fra: fmt(index.countries.find((c) => c.iso3 === 'FRA')?.carbonIntensity),
+          })}
         />
       </section>
 

@@ -1,10 +1,23 @@
+import { useEffect, useState } from 'react'
 import { useLang } from '../i18n'
 import taiwanDetail from '../data/taiwan-detail.json'
+import { loadIndex } from '../lib/data'
+import { fmt } from '../lib/energy'
 
 const householdMonthly = Math.round(taiwanDetail.householdAvgKwhPerYear / 12).toLocaleString()
 const householdYearly = taiwanDetail.householdAvgKwhPerYear.toLocaleString()
 
-const content = {
+/** 說明文字裡的資料點一律從即時資料計算，永遠不會與各頁面顯示的數字衝突 */
+interface LiveExamples {
+  year: number
+  worldCi: string
+  fraCi: string
+  twnCi: string
+  twnSelf: string
+}
+
+function buildContent(live: LiveExamples) {
+  return {
   zh: {
     intro: [
       '全球電力地圖是一個開放的公益工具，讓任何人都能輕鬆查詢：全世界每個國家的電從哪裡來（煤、天然氣、核能、水力、風力、太陽能、地熱⋯⋯）、電網有多乾淨、能源靠不靠進口，以及電流向了哪些產業與企業。',
@@ -14,14 +27,14 @@ const content = {
     methods: [
       ['各國發電結構、碳強度、用電量', 'Our World in Data（OWID）energy dataset，底層來源為 Ember 與 Energy Institute，涵蓋 1985 年至今、215 個國家/地區，每月由自動化管線更新並經驗證關卡把關。'],
       ['地熱、離岸/陸域風電拆分', 'IRENA（國際再生能源總署）統計。IRENA 年份較 Ember 晚一至兩年時，較新年份沿用最近一年的拆分「比例」估計，圖上會標註。'],
-      ['能源自給率', '以 OWID 資料估算：本國生產能源（煤、油、氣＋核能與再生能源）÷ 一次能源總消費（替代法）。與各國官方數字可能有差異——例如台灣官方（能源署）以進口能源占能源供給計算約 96–97%（核燃料視為進口），本站用替代法估算出的自產比例低了不少（實際數字見台灣頁「能源身分證」區塊，會隨資料更新變動），但兩者口徑不同、結論一致：台灣能源高度依賴進口。'],
+      ['能源自給率', `以 OWID 資料估算：本國生產能源（煤、油、氣＋核能與再生能源）÷ 一次能源總消費（替代法）。與各國官方數字可能有差異——例如台灣官方（能源署）以進口能源占能源供給計算約 96–97%（核燃料視為進口），本站以替代法估算的自產比例目前為 ${live.twnSelf}%（隨資料每月更新），兩者口徑不同、結論一致：台灣能源高度依賴進口。`],
       ['台灣部門用電與用電大戶、企業綠電', '人工整理自經濟部能源署、台電、各公司永續報告、RE100 與媒體報導，每筆資料都標註來源與年份。'],
       ['地圖圖資', 'Natural Earth（world-atlas）。台灣以獨立圖徵呈現；本站尊重各地區的主體性。'],
     ],
     glossaryTitle: '名詞小辭典',
     glossary: [
       ['度（kWh）／ TWh', '「一度電」= 1 kWh，大約可以讓冷氣吹一小時。1 TWh = 10 億度。'],
-      ['碳強度', '每發一度電平均排放多少克 CO₂。越低越乾淨：以核能、水力為主的國家通常最低（如法國），以燃煤為主的國家通常最高。各國最新實際數值請見該國頁面，會隨資料每月更新而變動。'],
+      ['碳強度', `每發一度電平均排放多少克 CO₂。越低越乾淨——${live.year} 年實際數值：全球平均約 ${live.worldCi}、法國（核能為主）約 ${live.fraCi}、台灣（化石為主）約 ${live.twnCi}。這些數字直接取自本站即時資料，隨每月更新變動。`],
       ['低碳電力', '再生能源（水力、風力、太陽能、地熱、生質能）＋核能。'],
       ['CPPA（企業購電契約）', '企業直接與綠電電廠簽訂長期購電合約，是大企業取得綠電的主要方式，也幫新電廠取得融資。'],
       ['RE100', '全球再生能源倡議，成員企業承諾在目標年前 100% 使用再生電力。'],
@@ -52,14 +65,14 @@ const content = {
     methods: [
       ['Country generation mix, carbon intensity, demand', 'Our World in Data (OWID) energy dataset, built on Ember and the Energy Institute. Covers 215 countries/areas since 1985, refreshed monthly by an automated, validated pipeline.'],
       ['Geothermal and onshore/offshore wind split', 'IRENA statistics. Where IRENA lags Ember by a year or two, the most recent split ratio is carried forward as an estimate (marked on charts).'],
-      ['Energy self-sufficiency', 'Estimated from OWID data: domestic energy production (coal, oil, gas + nuclear and renewables) ÷ total primary energy consumption (substitution method). May differ from official national figures — e.g. Taiwan officially reports ~96–97% import dependence (counting nuclear fuel as imported), while our substitution-method estimate of domestic production is considerably lower (see the live figure on Taiwan’s "Energy ID card" section, which shifts as data refreshes); different methods, same conclusion.'],
+      ['Energy self-sufficiency', `Estimated from OWID data: domestic energy production (coal, oil, gas + nuclear and renewables) ÷ total primary energy consumption (substitution method). May differ from official national figures — e.g. Taiwan officially reports ~96–97% import dependence (counting nuclear fuel as imported), while our substitution-method estimate of domestic production is currently ${live.twnSelf}% (refreshed monthly); different methods, same conclusion.`],
       ['Taiwan sector/company data, corporate clean power', 'Hand-compiled from Taiwan’s Energy Administration, Taipower, corporate sustainability reports, RE100 and media coverage — every figure carries its source and year.'],
       ['Map', 'Natural Earth (world-atlas). Taiwan is shown as its own feature; we respect the identity of every region.'],
     ],
     glossaryTitle: 'Glossary',
     glossary: [
       ['kWh / TWh', 'One kWh runs an air conditioner for about an hour. 1 TWh = 1 billion kWh.'],
-      ['Carbon intensity', 'Grams of CO₂ per kWh generated. Lower is cleaner: countries running mostly on nuclear or hydro (e.g. France) tend to be lowest; coal-heavy grids tend to be highest. See each country’s page for its latest actual value — it shifts as data is refreshed monthly.'],
+      ['Carbon intensity', `Grams of CO₂ per kWh generated. Lower is cleaner — actual ${live.year} values: world average ≈ ${live.worldCi}, France (mostly nuclear) ≈ ${live.fraCi}, Taiwan (mostly fossil) ≈ ${live.twnCi}. These figures come straight from this site's live data and shift with the monthly refresh.`],
       ['Low-carbon electricity', 'Renewables (hydro, wind, solar, geothermal, bioenergy) plus nuclear.'],
       ['CPPA', 'Corporate Power Purchase Agreement — a long-term contract to buy power directly from a clean-energy plant; how big companies mainly source renewables, and how new plants get financed.'],
       ['RE100', 'A global initiative whose members commit to 100% renewable electricity by a target year.'],
@@ -81,11 +94,29 @@ const content = {
       'This is a public-interest tool; figures are for general understanding. Rely on official statistics for consequential decisions.',
     ],
   },
+  }
 }
 
 export default function About() {
   const { t, lang } = useLang()
-  const c = content[lang]
+  const [live, setLive] = useState<LiveExamples | null>(null)
+
+  useEffect(() => {
+    loadIndex().then((idx) => {
+      const twn = idx.countries.find((c) => c.iso3 === 'TWN')
+      const fra = idx.countries.find((c) => c.iso3 === 'FRA')
+      setLive({
+        year: idx.world.latestYear,
+        worldCi: fmt(idx.world.latest.carbonIntensity),
+        fraCi: fmt(fra?.carbonIntensity),
+        twnCi: fmt(twn?.carbonIntensity),
+        twnSelf: twn?.selfSufficiency != null ? fmt(twn.selfSufficiency * 100, 1) : '–',
+      })
+    })
+  }, [])
+
+  if (!live) return <div className="py-24 text-center text-stone-400">{t('loading')}</div>
+  const c = buildContent(live)[lang]
 
   return (
     <div className="mx-auto max-w-3xl space-y-10 pt-8">
