@@ -21,7 +21,7 @@ function buildContent(live: LiveExamples) {
   zh: {
     intro: [
       '全球電力地圖是一個開放的公益工具，讓任何人都能輕鬆查詢：全世界每個國家的電從哪裡來（煤、天然氣、核能、水力、風力、太陽能、地熱⋯⋯）、電網有多乾淨、能源靠不靠進口，以及電流向了哪些產業與企業。',
-      '網站的程式碼開放原始碼（MIT 授權），資料也完全開放——你可以直接把本站的 JSON 檔當成免費 API 使用。',
+      '網站程式碼以 MIT 授權開放原始碼；所有數據皆整理自下列公開發布的來源，並逐筆標註出處與年份。',
     ],
     methodTitle: '資料來源與方法',
     methods: [
@@ -29,7 +29,6 @@ function buildContent(live: LiveExamples) {
       ['地熱、離岸/陸域風電拆分', 'IRENA（國際再生能源總署）統計。IRENA 年份較 Ember 晚一至兩年時，較新年份沿用最近一年的拆分「比例」估計，圖上會標註。'],
       ['能源自給率', `以 OWID 資料估算：本國生產能源（煤、油、氣＋核能與再生能源）÷ 一次能源總消費（替代法）。與各國官方數字可能有差異——例如台灣官方（能源署）以進口能源占能源供給計算約 96–97%（核燃料視為進口），本站以替代法估算的自產比例目前為 ${live.twnSelf}%（隨資料每月更新），兩者口徑不同、結論一致：台灣能源高度依賴進口。`],
       ['台灣部門用電與用電大戶、企業綠電', '人工整理自經濟部能源署、台電、各公司永續報告、RE100 與媒體報導，每筆資料都標註來源與年份。'],
-      ['地圖圖資', 'Natural Earth（world-atlas）。台灣以獨立圖徵呈現；本站尊重各地區的主體性。'],
     ],
     glossaryTitle: '名詞小辭典',
     glossary: [
@@ -41,25 +40,18 @@ function buildContent(live: LiveExamples) {
       ['容量因子', '電廠實際發電量佔理論最大發電量的比例。太陽能約 15–25%、離岸風電約 40–50%、核能可達 90%。'],
       ['家庭用電換算', `本站台灣頁以台電最新統計「每戶每月平均約 ${householdMonthly} 度（年約 ${householdYearly} 度）」為換算基準，數字取自 taiwan-detail.json，與台灣頁同步更新。`],
     ],
-    apiTitle: '開放資料 API',
-    apiIntro: '本站所有資料都是靜態 JSON 檔，部署後即為免費開放 API，歡迎直接串接（CC BY 4.0，請標註來源）：',
-    apiRows: [
-      ['/data/countries.json', '全部國家索引：最新年份能源結構佔比、碳強度、自給率、進出口徽章、世界彙總'],
-      ['/data/country/TWN.json', '單一國家 1985 年至今完整時間序列（以 ISO3 代碼替換 TWN）'],
-      ['/data/world.geo.json', '世界地圖 GeoJSON（含 iso3 屬性）'],
-    ],
     licenseTitle: '授權與引用',
     license: [
       '程式碼：MIT License，歡迎 fork 與改作。',
-      '地圖邊界：採用 Natural Earth 圖資，僅供資料視覺化之用，不代表本站對任何領土主權爭議的立場；台灣以獨立圖徵呈現。',
-      '資料：衍生自 OWID／Ember／Energy Institute／IRENA，依 CC BY 4.0 再散布。引用時請標註「Global Power Atlas，資料來源：Our World in Data、Ember、Energy Institute、IRENA」。',
+      '地圖：Natural Earth 公開圖資，僅供資料視覺化參考。',
+      '數據：整理自 Our World in Data、Ember、Energy Institute、IRENA 等機構公開發布的資料集，版權與授權條款歸原機構所有（OWID 標示為 CC BY 4.0）。引用本站內容時，請一併標註上述原始來源；若需再利用原始資料，請先確認各機構的授權條款。',
       '本站為公益資訊工具，數據僅供大眾理解參考，重大決策請以官方統計為準。',
     ],
   },
   en: {
     intro: [
       'Global Power Atlas is an open, public-interest tool: look up where any country’s electricity comes from (coal, gas, nuclear, hydro, wind, solar, geothermal…), how clean its grid is, how import-dependent its energy supply is, and which industries and companies use the power.',
-      'The code is open source (MIT) and the data is fully open — you can use this site’s JSON files directly as a free API.',
+      'The site’s code is open source (MIT); every figure is compiled from the publicly released sources listed below, each cited with its source and year.',
     ],
     methodTitle: 'Data sources & methodology',
     methods: [
@@ -67,7 +59,6 @@ function buildContent(live: LiveExamples) {
       ['Geothermal and onshore/offshore wind split', 'IRENA statistics. Where IRENA lags Ember by a year or two, the most recent split ratio is carried forward as an estimate (marked on charts).'],
       ['Energy self-sufficiency', `Estimated from OWID data: domestic energy production (coal, oil, gas + nuclear and renewables) ÷ total primary energy consumption (substitution method). May differ from official national figures — e.g. Taiwan officially reports ~96–97% import dependence (counting nuclear fuel as imported), while our substitution-method estimate of domestic production is currently ${live.twnSelf}% (refreshed monthly); different methods, same conclusion.`],
       ['Taiwan sector/company data, corporate clean power', 'Hand-compiled from Taiwan’s Energy Administration, Taipower, corporate sustainability reports, RE100 and media coverage — every figure carries its source and year.'],
-      ['Map', 'Natural Earth (world-atlas). Taiwan is shown as its own feature; we respect the identity of every region.'],
     ],
     glossaryTitle: 'Glossary',
     glossary: [
@@ -79,18 +70,11 @@ function buildContent(live: LiveExamples) {
       ['Capacity factor', 'Actual output as a share of theoretical maximum. Solar ≈ 15–25%, offshore wind ≈ 40–50%, nuclear up to 90%.'],
       ['Household conversion', `The Taiwan page converts using Taipower's latest average of ~${householdMonthly} kWh per household per month (≈ ${householdYearly} kWh/yr), sourced from taiwan-detail.json and kept in sync with the Taiwan page.`],
     ],
-    apiTitle: 'Open data API',
-    apiIntro: 'All site data is static JSON — once deployed it doubles as a free open API (CC BY 4.0, attribution required):',
-    apiRows: [
-      ['/data/countries.json', 'Index of all countries: latest mix shares, carbon intensity, self-sufficiency, trade badges, world aggregate'],
-      ['/data/country/TWN.json', 'Full time series since 1985 for one country (replace TWN with any ISO3 code)'],
-      ['/data/world.geo.json', 'World map GeoJSON with iso3 properties'],
-    ],
     licenseTitle: 'License & citation',
     license: [
       'Code: MIT License — forks and derivatives welcome.',
-      'Map boundaries: Natural Earth data, used for visualization only — no position is taken on territorial disputes; Taiwan is shown as its own feature.',
-      'Data: derived from OWID / Ember / Energy Institute / IRENA, redistributed under CC BY 4.0. Please cite “Global Power Atlas — data: Our World in Data, Ember, Energy Institute, IRENA”.',
+      'Map: Natural Earth public map data, used for visualization reference only.',
+      'Figures: compiled from datasets publicly released by Our World in Data, Ember, the Energy Institute and IRENA; copyright and license terms remain with those organizations (OWID is marked CC BY 4.0). When citing this site, please also credit the original sources; verify each organization’s terms before reusing raw data.',
       'This is a public-interest tool; figures are for general understanding. Rely on official statistics for consequential decisions.',
     ],
   },
@@ -149,19 +133,6 @@ export default function About() {
             </div>
           ))}
         </dl>
-      </section>
-
-      <section>
-        <h2 className="text-xl font-bold text-stone-900">{c.apiTitle}</h2>
-        <p className="mt-2 text-sm leading-relaxed text-stone-600">{c.apiIntro}</p>
-        <div className="mt-3 overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
-          {c.apiRows.map(([path, desc]) => (
-            <div key={path} className="border-b border-stone-100 p-4 last:border-0">
-              <code className="rounded bg-stone-100 px-2 py-0.5 text-xs font-semibold text-brand-700">{path}</code>
-              <p className="mt-1.5 text-sm text-stone-600">{desc}</p>
-            </div>
-          ))}
-        </div>
       </section>
 
       <section>

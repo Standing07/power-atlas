@@ -133,7 +133,12 @@ export default function WorldMap() {
           className="h-[340px] w-full sm:h-[460px]"
           onReady={(chart) => (chartRef.current = chart)}
           onClick={(params) => {
-            if (params.componentType === 'series' && typeof params.name === 'string' && params.name.length === 3) {
+            // 只導向有資料檔的國家，避免點到無資料的小型屬地出現錯誤頁
+            if (
+              params.componentType === 'series' &&
+              typeof params.name === 'string' &&
+              countries.some((c) => c.iso3 === params.name)
+            ) {
               navigate(params.name === 'TWN' ? '/taiwan' : `/country/${params.name}`)
             }
           }}

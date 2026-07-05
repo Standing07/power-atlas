@@ -11,7 +11,7 @@ An open, public-interest site for exploring every country's electricity mix, gri
 - 🇹🇼 台灣深度頁：部門用電、用電大戶（台積電、中鋼、台塑、資料中心）與家庭用電換算
 - 🏢 企業綠電/CPPA 卡片（多產業，附來源）
 - 🔄 GitHub Actions 每月自動更新資料，內建驗證關卡（驗證失敗自動保留舊資料）
-- 📖 開放原始碼（MIT）＋開放資料（CC BY 4.0）
+- 📖 開放原始碼（MIT）；數據整理自各機構公開發布的資料集，逐筆標註來源
 
 ## 本地開發
 
@@ -22,9 +22,9 @@ npm run build      # 產出可部署的靜態網站（dist/）
 npm run data       # 重新抓取並驗證最新資料（--force 可強制重新下載）
 ```
 
-## 開放資料 API
+## 資料檔案（JSON）
 
-部署後，以下路徑就是免費 API（純靜態 JSON，CC BY 4.0，請標註來源）：
+網站的資料為靜態 JSON 檔，路徑如下（維護與除錯用；數據版權歸原始機構所有，再利用前請確認各機構授權條款）：
 
 | 路徑 | 內容 |
 |---|---|
@@ -52,4 +52,4 @@ npm run data       # 重新抓取並驗證最新資料（--force 可強制重新
 ## 授權
 
 - 程式碼：[MIT](./LICENSE)
-- 資料：衍生自 [Our World in Data](https://github.com/owid/energy-data)（Ember、Energy Institute）與 [IRENA](https://pxweb.irena.org)，依 CC BY 4.0 再散布。引用請標註：「Global Power Atlas — 資料來源：Our World in Data、Ember、Energy Institute、IRENA」。
+- 數據：整理自 [Our World in Data](https://github.com/owid/energy-data)（Ember、Energy Institute）與 [IRENA](https://pxweb.irena.org) 公開發布的資料集，版權與授權條款歸原機構所有（OWID 標示為 CC BY 4.0）。引用請一併標註原始來源。

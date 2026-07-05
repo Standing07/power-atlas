@@ -31,6 +31,7 @@ export default function Country() {
   const [data, setData] = useState<CountrySeries | null>(null)
   const [index, setIndex] = useState<CountriesIndex | null>(null)
   const [failed, setFailed] = useState(false)
+  const [attempt, setAttempt] = useState(0)
 
   useEffect(() => {
     setData(null)
@@ -42,13 +43,22 @@ export default function Country() {
         setIndex(idx)
       })
       .catch(() => setFailed(true))
-  }, [iso3])
+  }, [iso3, attempt])
 
   if (failed)
     return (
       <div className="py-24 text-center">
         <p className="text-lg text-stone-500">{t('not_found')}</p>
-        <Link to="/" className="mt-4 inline-block text-brand-600 hover:underline">← {t('back_home')}</Link>
+        <div className="mt-4 flex items-center justify-center gap-6">
+          <button
+            type="button"
+            onClick={() => setAttempt((a) => a + 1)}
+            className="rounded-full bg-brand-500 px-5 py-2 text-sm font-medium text-white shadow hover:bg-brand-600"
+          >
+            {t('retry')}
+          </button>
+          <Link to="/" className="text-brand-600 hover:underline">← {t('back_home')}</Link>
+        </div>
       </div>
     )
   if (!data || !index) return <div className="py-24 text-center text-stone-400">{t('loading')}</div>
