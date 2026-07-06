@@ -244,6 +244,13 @@ function applyIrenaSplit(point, irenaYear, estimated = false) {
 function selfSufficiency(r, carriedFossil) {
   const total = r.primary_energy_consumption
   if (!total || total <= 0) return null
+  // 一次能源的「本國生產」細項（核能＋各類再生能源消費）。小國常只有電力資料、
+  // 這些細項全為 null——此時替代法分子會被錯算成 0，因此直接回傳無資料，不列入排行。
+  const consumptionFields = [
+    r.nuclear_consumption, r.hydro_consumption, r.wind_consumption,
+    r.solar_consumption, r.biofuel_consumption, r.other_renewable_consumption,
+  ]
+  if (!consumptionFields.some((v) => v != null)) return null
   const hasProdData = r.coal_production != null || r.oil_production != null || r.gas_production != null
   let fossil = (r.coal_production ?? 0) + (r.oil_production ?? 0) + (r.gas_production ?? 0)
   if (!hasProdData) {

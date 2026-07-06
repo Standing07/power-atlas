@@ -12,13 +12,15 @@ import { PRIORITY_COUNTRIES } from '../data/priority-countries'
 import cleantech from '../data/cleantech.json'
 import insightsData from '../data/country-insights.json'
 import outlookData from '../data/outlook.json'
-import { fmt } from '../lib/energy'
+import specialBoards from '../data/special-boards.json'
+import { fmt, twhToHuman } from '../lib/energy'
+import type { TKey } from '../i18n'
 
 const MIN_GEN_TWH = 5 // 排行榜只列入具規模的電力系統
 
 interface Board {
-  titleKey: 'lb_cleanest' | 'lb_windsolar' | 'lb_efficient' | 'lb_exporters' | 'lb_importers'
-  descKey: 'lb_cleanest_desc' | 'lb_windsolar_desc' | 'lb_efficient_desc' | 'lb_exporters_desc' | 'lb_importers_desc'
+  titleKey: TKey
+  descKey: TKey
   rows: { c: CountryIndexEntry; display: string }[]
 }
 
@@ -55,8 +57,16 @@ export default function Home() {
         rows: top(sizable, (c) => (c.shares.wind ?? 0) + (c.shares.solar ?? 0), (c) => `${fmt((c.shares.wind ?? 0) + (c.shares.solar ?? 0), 1)}%`),
       },
       {
-        titleKey: 'lb_efficient', descKey: 'lb_efficient_desc',
-        rows: top(sizable.filter((c) => (c.generation ?? 0) >= 20), (c) => c.energyPerGdp, (c) => `${fmt(c.energyPerGdp, 2)} kWh/$`, true),
+        titleKey: 'lb_carbon_high', descKey: 'lb_carbon_high_desc',
+        rows: top(sizable, (c) => c.carbonIntensity, (c) => `${fmt(c.carbonIntensity)} g`),
+      },
+      {
+        titleKey: 'lb_percapita', descKey: 'lb_percapita_desc',
+        rows: top(sizable, (c) => c.demandPerCapita, (c) => `${fmt(c.demandPerCapita)} kWh`),
+      },
+      {
+        titleKey: 'lb_generation', descKey: 'lb_generation_desc',
+        rows: top(sizable, (c) => c.generation, (c) => twhToHuman(c.generation, lang)),
       },
       {
         titleKey: 'lb_exporters', descKey: 'lb_exporters_desc',
@@ -67,7 +77,7 @@ export default function Home() {
         rows: top(sizable, (c) => c.selfSufficiency, (c) => `${fmt((c.selfSufficiency ?? 0) * 100)}%`, true),
       },
     ]
-  }, [index])
+  }, [index, lang])
 
   const priority = useMemo(() => {
     if (!index) return []
@@ -188,6 +198,31 @@ export default function Home() {
                   </li>
                 ))}
               </ol>
+            </div>
+          ))}
+
+          {/* 資料中心與重工業：無法自動計算，用 IEA 權威數字整理 */}
+          {[specialBoards.dataCenters, specialBoards.industries].map((b) => (
+            <div key={b.title.en} className="rounded-3xl border-2 border-brand-100 bg-brand-50/40 p-5 shadow-sm">
+              <h3 className="font-bold text-stone-900">{pick(lang, b.title)}</h3>
+              <p className="mt-0.5 text-xs text-stone-400">{pick(lang, b.desc)}</p>
+              <ol className="mt-3 space-y-1.5">
+                {b.rows.map((r, i) => (
+                  <li key={i} className="flex items-center gap-2 px-2 py-1 text-sm">
+                    <span className="w-5 text-right text-xs font-semibold text-stone-400">{i + 1}</span>
+                    {'flag' in r && r.flag ? <Flag iso2={r.flag} /> : <span className="w-5 text-center">{'icon' in r ? r.icon : ''}</span>}
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate">{pick(lang, r.name)}</span>
+                      {r.sub && <span className="block truncate text-[11px] text-stone-400">{pick(lang, r.sub)}</span>}
+                    </span>
+                    {r.value && <span className="shrink-0 text-xs font-semibold text-brand-600">{r.value}</span>}
+                  </li>
+                ))}
+              </ol>
+              <p className="mt-3 border-t border-brand-100 pt-2 text-[11px] leading-relaxed text-stone-500">{pick(lang, b.note)}</p>
+              <a href={b.source.url} target="_blank" rel="noreferrer" className="mt-1.5 inline-block text-xs text-brand-600 hover:underline">
+                {t('source_label')}：{b.source.label} ↗
+              </a>
             </div>
           ))}
         </div>

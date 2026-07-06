@@ -1,0 +1,28 @@
+{
+  "_comment": "無法自動計算的排行（資料中心、產業），改用權威機構數字人工整理，附來源年份。",
+  "dataCenters": {
+    "title": { "zh": "資料中心用電最多的國家／地區", "en": "Largest data-center electricity users" },
+    "desc": { "zh": "AI 熱潮下最大的新增用電來源（IEA 2024 估計）", "en": "The biggest new source of demand in the AI era (IEA 2024 estimates)" },
+    "rows": [
+      { "flag": "US", "name": { "zh": "美國", "en": "United States" }, "value": "180 TWh", "sub": { "zh": "全球 44%", "en": "44% of world" } },
+      { "flag": "CN", "name": { "zh": "中國", "en": "China" }, "value": "102 TWh", "sub": { "zh": "全球 25%", "en": "25% of world" } },
+      { "flag": "EU", "name": { "zh": "歐洲主要國（德/法/英/荷）", "en": "Major EU (DE/FR/UK/NL)" }, "value": "41 TWh", "sub": { "zh": "全球 10%", "en": "10% of world" } },
+      { "flag": "IE", "name": { "zh": "愛爾蘭", "en": "Ireland" }, "value": "22%", "sub": { "zh": "佔全國用電比例最高", "en": "highest national share" } }
+    ],
+    "note": { "zh": "全球資料中心 2024 年約用電 415 TWh（佔全球 1.5%），IEA 預估 2030 年翻倍至約 945 TWh。", "en": "Global data centers used ~415 TWh in 2024 (1.5% of world); the IEA expects this to double to ~945 TWh by 2030." },
+    "source": { "label": "IEA Energy & AI 2024 / CEPR", "url": "https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai" }
+  },
+  "industries": {
+    "title": { "zh": "最耗電的重工業", "en": "The most power-hungry heavy industries" },
+    "desc": { "zh": "工業佔全球用電約 42%，其中這幾類最耗電（IEA）", "en": "Industry uses ~42% of world electricity; these subsectors dominate (IEA)" },
+    "rows": [
+      { "icon": "⚙️", "name": { "zh": "鋼鐵", "en": "Iron & steel" }, "value": "", "sub": { "zh": "電弧爐煉鋼耗電極大", "en": "electric-arc steelmaking is very power-intensive" } },
+      { "icon": "🧪", "name": { "zh": "化學／石化", "en": "Chemicals & petrochemicals" }, "value": "", "sub": { "zh": "基礎化學品、氯鹼", "en": "base chemicals, chlor-alkali" } },
+      { "icon": "🔩", "name": { "zh": "鋁與有色金屬", "en": "Aluminium & non-ferrous metals" }, "value": "", "sub": { "zh": "電解鋁是單一最耗電製程之一", "en": "aluminium smelting is among the single most power-intensive processes" } },
+      { "icon": "🧱", "name": { "zh": "水泥與非金屬礦物", "en": "Cement & non-metallic minerals" }, "value": "", "sub": { "zh": "研磨與窯爐用電", "en": "grinding and kilns" } },
+      { "icon": "📄", "name": { "zh": "造紙與紙漿", "en": "Pulp & paper" }, "value": "", "sub": { "zh": "製程用電密集", "en": "electricity-intensive processing" } }
+    ],
+    "note": { "zh": "IEA 指出：到 2030 年，美國光是資料中心的用電，就將超過鋁、鋼、水泥、化學等所有高耗能工業的總和。", "en": "The IEA notes that by 2030, US data centers alone will use more electricity than aluminium, steel, cement, chemicals and all other energy-intensive goods combined." },
+    "source": { "label": "IEA — Industry / Energy & AI", "url": "https://www.iea.org/energy-system/industry" }
+  }
+}
