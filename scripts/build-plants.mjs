@@ -18,6 +18,10 @@ import { execSync } from 'node:child_process'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import ExcelJS from 'exceljs'
+import countries from 'i18n-iso-countries'
+import { createRequire } from 'node:module'
+const require = createRequire(import.meta.url)
+countries.registerLocale(require('i18n-iso-countries/langs/en.json'))
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const CACHE = path.join(ROOT, 'scripts', '.cache')
@@ -199,14 +203,79 @@ async function processEIA() {
   return { USA: { plants: list, source: { label, url: 'https://www.eia.gov/electricity/data/eia860m/', year: file.year } } }
 }
 
-// ---------------------------------------------------------------- GEM（使用者提供的 Excel，選用）
-// 若 scripts/.cache/gem.xlsx 存在則處理，覆蓋指定國家。欄位對應待實際檔案確認。
+// ---------------------------------------------------------------- GEM Global Integrated Power Tracker
+// scripts/.cache/gem.xlsx（使用者半年填表單下載）。覆蓋「重點國家＋東亞」，僅運轉中、≥100MW。
+
+// GEM 國家名稱 → ISO3（i18n-iso-countries 對不到的手動補）
+const GEM_NAME_FIX = {
+  'South Korea': 'KOR', 'North Korea': 'PRK', 'Taiwan': 'TWN', 'Vietnam': 'VNM',
+  'Russia': 'RUS', 'Turkey': 'TUR', 'Iran': 'IRN', 'Hong Kong': 'HKG', 'Macau': 'MAC',
+  'United States': 'USA', 'Czechia': 'CZE', 'Laos': 'LAO', 'Brunei': 'BRN',
+}
+// GEM Type → 本站燃料鍵
+const GEM_TYPE = {
+  'utility-scale solar': 'solar', wind: 'wind', coal: 'coal', hydropower: 'hydro',
+  bioenergy: 'biofuel', nuclear: 'nuclear', geothermal: 'geothermal',
+}
+// 目標國家：重點國家（除美國，走 EIA）＋東亞
+const GEM_TARGET = new Set([
+  'TWN', 'CHN', 'JPN', 'DEU', 'IND', 'GBR', 'FRA', 'KOR', 'ITA', 'BRA', 'CAN', 'RUS',
+  'AUS', 'MEX', 'ESP', 'IDN', 'NLD', 'SAU', 'TUR', 'CHE', 'POL', 'SGP', 'VNM', 'PHL',
+  'THA', 'MYS', 'EGY', 'NGA', 'ARG', 'MNG', 'PRK', 'HKG', 'MAC',
+])
+
+const cell = (v) => (v && typeof v === 'object' ? (v.result ?? v.text ?? '') : v)
+
+function gemIso3(name) {
+  return GEM_NAME_FIX[name] ?? countries.getAlpha3Code(name, 'en') ?? null
+}
 
 async function processGEM() {
   const gemPath = path.join(CACHE, 'gem.xlsx')
   try { await access(gemPath) } catch { return null }
-  console.log('  ℹ 偵測到 GEM 檔案，但欄位對應需依實際檔案設定（見 build-plants.mjs 註解）')
-  return null // 佔位：使用者提供檔案後再實作欄位對應
+  console.log('  ↓ 處理 GEM Global Integrated Power Tracker')
+
+  const reader = new ExcelJS.stream.xlsx.WorkbookReader(gemPath, {})
+  // 聚合鍵 = GEM location ID（同一場址）；沒有就用 名稱|國家
+  const sites = new Map() // key -> { iso3, name, lat, lon, mw, fuels:{}, year }
+  for await (const ws of reader) {
+    if (ws.name !== 'Power facilities') continue
+    for await (const row of ws) {
+      if (row.number === 1) continue
+      const v = row.values
+      if (String(cell(v[10])) !== 'operating') continue
+      const iso3 = gemIso3(String(cell(v[2]) || ''))
+      if (!iso3 || !GEM_TARGET.has(iso3)) continue
+      const mw = Number(cell(v[9]))
+      const lat = Number(cell(v[43])), lon = Number(cell(v[44]))
+      if (!Number.isFinite(mw) || mw <= 0 || !Number.isFinite(lat) || !Number.isFinite(lon)) continue
+      // 燃料：油/氣用第 17 欄細分，其餘用 Type
+      const type = String(cell(v[1]) || '')
+      let fuel = GEM_TYPE[type] ?? 'other'
+      if (type === 'oil/gas') fuel = /oil/i.test(String(cell(v[17]) || '')) ? 'oil' : 'gas'
+      const key = String(cell(v[50]) || `${cell(v[5])}|${iso3}`)
+      if (!sites.has(key)) sites.set(key, { iso3, name: String(cell(v[5]) || ''), lat, lon, mw: 0, fuels: {}, year: null })
+      const s = sites.get(key)
+      s.mw += mw
+      s.fuels[fuel] = (s.fuels[fuel] ?? 0) + mw
+      const y = Number(cell(v[11]))
+      if (Number.isFinite(y) && y > 1900) s.year = s.year ? Math.min(s.year, y) : y
+    }
+    break
+  }
+
+  const byCountry = {}
+  let kept = 0
+  for (const s of sites.values()) {
+    if (s.mw < MIN_MW) continue
+    const fuel = Object.entries(s.fuels).sort((a, b) => b[1] - a[1])[0][0]
+    const plant = { name: s.name, mw: Math.round(s.mw), lat: round4(s.lat), lon: round4(s.lon), fuel, tier: tierOf(s.mw), year: s.year }
+    if (!byCountry[s.iso3]) byCountry[s.iso3] = { plants: [], source: { label: 'GEM Global Integrated Power Tracker (Mar 2026)', url: 'https://globalenergymonitor.org/projects/global-integrated-power-tracker/', year: 2026 } }
+    byCountry[s.iso3].plants.push(plant)
+    kept++
+  }
+  console.log(`  ✓ GEM：${kept} 座 ≥${MIN_MW}MW 運轉中電廠，${Object.keys(byCountry).length} 個目標國家`)
+  return byCountry
 }
 
 // ---------------------------------------------------------------- 主流程
