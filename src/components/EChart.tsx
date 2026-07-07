@@ -4,12 +4,13 @@ import * as echarts from 'echarts'
 interface Props {
   option: echarts.EChartsOption
   className?: string
+  notMerge?: boolean
   onClick?: (params: echarts.ECElementEvent) => void
   onReady?: (chart: echarts.ECharts) => void
 }
 
 /** 通用 ECharts 包裝：自動掛載、更新與隨視窗縮放 */
-export default function EChart({ option, className, onClick, onReady }: Props) {
+export default function EChart({ option, className, notMerge = false, onClick, onReady }: Props) {
   const ref = useRef<HTMLDivElement>(null)
   const chartRef = useRef<echarts.ECharts | null>(null)
   const onClickRef = useRef(onClick)
@@ -34,11 +35,11 @@ export default function EChart({ option, className, onClick, onReady }: Props) {
   useEffect(() => {
     // try/catch：圖表設定異常時只記錄錯誤，不讓整頁崩潰
     try {
-      chartRef.current?.setOption(option, { notMerge: false })
+      chartRef.current?.setOption(option, { notMerge })
     } catch (err) {
       console.error('EChart setOption failed:', err)
     }
-  }, [option])
+  }, [option, notMerge])
 
   return <div ref={ref} className={className} />
 }

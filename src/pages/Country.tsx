@@ -15,6 +15,7 @@ import outlookData from '../data/outlook.json'
 import consumersData from '../data/major-consumers.json'
 import CountrySelect from '../components/CountrySelect'
 import Carousel from '../components/Carousel'
+import PlantMap from '../components/PlantMap'
 
 type L10n = { zh: string; en: string }
 interface SourcedItem { text: L10n; source: { label: string; url: string } }
@@ -186,6 +187,8 @@ export function CountryView({
         <p className="text-xs text-stone-400">{t('trend_subtitle')}</p>
         <TrendArea series={data.series} className="mt-2 h-80 w-full" />
       </section>
+
+      <PlantMap iso3={data.iso3} />
 
       <SectorSection iso3={data.iso3} />
 

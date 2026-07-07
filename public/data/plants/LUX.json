@@ -1,0 +1,1 @@
+{"iso3":"LUX","count":2,"byFuel":{"hydro":1,"gas":1},"byTier":{"1-2GW":1,"100-500MW":1},"plants":[{"name":"Vianden Pumped Storage Power Plant Luxembourg","mw":1296,"lat":49.9518,"lon":6.1784,"fuel":"hydro","tier":"1-2GW","year":null},{"name":"Esch-sur-Alzette CCGT Power Plant Luxembourg","mw":385,"lat":49.5119,"lon":5.9646,"fuel":"gas","tier":"100-500MW","year":null}]}

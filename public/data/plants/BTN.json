@@ -1,0 +1,1 @@
+{"iso3":"BTN","count":2,"byFuel":{"hydro":2},"byTier":{"1-2GW":1,"100-500MW":1},"plants":[{"name":"Tala Hydroelectric Power Plant Bhutan","mw":1020,"lat":27.036,"lon":89.5953,"fuel":"hydro","tier":"1-2GW","year":null},{"name":"Chhukha Hydroelectric Power Plant Bhutan","mw":336,"lat":27.1104,"lon":89.5313,"fuel":"hydro","tier":"100-500MW","year":null}]}

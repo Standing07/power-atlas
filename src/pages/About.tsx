@@ -29,6 +29,7 @@ function buildContent(live: LiveExamples) {
       ['地熱、離岸/陸域風電拆分', 'IRENA（國際再生能源總署）統計。IRENA 年份較 Ember 晚一至兩年時，較新年份沿用最近一年的拆分「比例」估計，圖上會標註。'],
       ['能源自給率', `以 OWID 資料估算：本國生產能源（煤、油、氣＋核能與再生能源）÷ 一次能源總消費（替代法）。與各國官方數字可能有差異——例如台灣官方（能源署）以進口能源占能源供給計算約 96–97%（核燃料視為進口），本站以替代法估算的自產比例目前為 ${live.twnSelf}%（隨資料每月更新），兩者口徑不同、結論一致：台灣能源高度依賴進口。`],
       ['台灣部門用電與用電大戶、企業綠電', '人工整理自經濟部能源署、台電、各公司永續報告、RE100 與媒體報導，每筆資料都標註來源與年份。'],
+      ['大型發電廠地圖', 'WRI 全球電廠資料庫（Global Power Plant Database v1.3, 2021），收錄各國裝置容量 100MW 以上的發電廠座標、容量與燃料別；地圖底圖為 OpenStreetMap／CARTO。此為 2021 年凍結版本，大型化石與核能、水力電廠變動不大，較新的風光電廠可能未收錄。'],
     ],
     glossaryTitle: '名詞小辭典',
     glossary: [
@@ -44,7 +45,7 @@ function buildContent(live: LiveExamples) {
     license: [
       '程式碼：MIT License，歡迎 fork 與改作。',
       '地圖：Natural Earth 公開圖資，僅供資料視覺化參考。',
-      '數據：整理自 Our World in Data、Ember、Energy Institute、IRENA 等機構公開發布的資料集，版權與授權條款歸原機構所有（OWID 標示為 CC BY 4.0）。引用本站內容時，請一併標註上述原始來源；若需再利用原始資料，請先確認各機構的授權條款。',
+      '數據：整理自 Our World in Data、Ember、Energy Institute、IRENA、WRI 全球電廠資料庫等機構公開發布的資料集，版權與授權條款歸原機構所有（OWID 與 WRI 標示為 CC BY 4.0）。引用本站內容時，請一併標註上述原始來源；若需再利用原始資料，請先確認各機構的授權條款。',
       '本站為公益資訊工具，數據僅供大眾理解參考，重大決策請以官方統計為準。',
     ],
   },
@@ -59,6 +60,7 @@ function buildContent(live: LiveExamples) {
       ['Geothermal and onshore/offshore wind split', 'IRENA statistics. Where IRENA lags Ember by a year or two, the most recent split ratio is carried forward as an estimate (marked on charts).'],
       ['Energy self-sufficiency', `Estimated from OWID data: domestic energy production (coal, oil, gas + nuclear and renewables) ÷ total primary energy consumption (substitution method). May differ from official national figures — e.g. Taiwan officially reports ~96–97% import dependence (counting nuclear fuel as imported), while our substitution-method estimate of domestic production is currently ${live.twnSelf}% (refreshed monthly); different methods, same conclusion.`],
       ['Taiwan sector/company data, corporate clean power', 'Hand-compiled from Taiwan’s Energy Administration, Taipower, corporate sustainability reports, RE100 and media coverage — every figure carries its source and year.'],
+      ['Major power plants map', 'WRI Global Power Plant Database (v1.3, 2021): location, capacity and fuel of plants ≥100 MW; basemap by OpenStreetMap/CARTO. This is a 2021 frozen release — large fossil, nuclear and hydro plants are stable, but recent wind/solar additions may be missing.'],
     ],
     glossaryTitle: 'Glossary',
     glossary: [
@@ -74,7 +76,7 @@ function buildContent(live: LiveExamples) {
     license: [
       'Code: MIT License — forks and derivatives welcome.',
       'Map: Natural Earth public map data, used for visualization reference only.',
-      'Figures: compiled from datasets publicly released by Our World in Data, Ember, the Energy Institute and IRENA; copyright and license terms remain with those organizations (OWID is marked CC BY 4.0). When citing this site, please also credit the original sources; verify each organization’s terms before reusing raw data.',
+      'Figures: compiled from datasets publicly released by Our World in Data, Ember, the Energy Institute, IRENA and the WRI Global Power Plant Database; copyright and license terms remain with those organizations (OWID and WRI are marked CC BY 4.0). When citing this site, please also credit the original sources; verify each organization’s terms before reusing raw data.',
       'This is a public-interest tool; figures are for general understanding. Rely on official statistics for consequential decisions.',
     ],
   },

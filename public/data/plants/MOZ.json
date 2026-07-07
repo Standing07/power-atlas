@@ -1,0 +1,1 @@
+{"iso3":"MOZ","count":2,"byFuel":{"hydro":2},"byTier":{"2GW+":1,"100-500MW":1},"plants":[{"name":"Cahora Bassa","mw":2075,"lat":-15.5859,"lon":32.7047,"fuel":"hydro","tier":"2GW+","year":1974},{"name":"Corumana","mw":166,"lat":-25.2185,"lon":32.1342,"fuel":"hydro","tier":"100-500MW","year":1988}]}

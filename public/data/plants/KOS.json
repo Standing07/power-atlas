@@ -1,0 +1,1 @@
+{"iso3":"KOS","count":2,"byFuel":{"coal":2},"byTier":{"500MW-1GW":2},"plants":[{"name":"Kosovo A Coal Power Plant Kosovo","mw":800,"lat":42.6767,"lon":21.0867,"fuel":"coal","tier":"500MW-1GW","year":null},{"name":"Kosovo B Coal Power Plant Kosovo","mw":678,"lat":42.6937,"lon":21.057,"fuel":"coal","tier":"500MW-1GW","year":null}]}

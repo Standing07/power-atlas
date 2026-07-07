@@ -1,0 +1,1 @@
+{"iso3":"SEN","count":2,"byFuel":{"oil":1,"hydro":1},"byTier":{"100-500MW":2},"plants":[{"name":"Cap Des Biches","mw":327,"lat":17.7197,"lon":-17.2996,"fuel":"oil","tier":"100-500MW","year":null},{"name":"Sambangalou","mw":120,"lat":12.3664,"lon":-12.1901,"fuel":"hydro","tier":"100-500MW","year":null}]}

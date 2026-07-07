@@ -53,3 +53,7 @@ npm run data       # 重新抓取並驗證最新資料（--force 可強制重新
 
 - 程式碼：[MIT](./LICENSE)
 - 數據：整理自 [Our World in Data](https://github.com/owid/energy-data)（Ember、Energy Institute）與 [IRENA](https://pxweb.irena.org) 公開發布的資料集，版權與授權條款歸原機構所有（OWID 標示為 CC BY 4.0）。引用請一併標註原始來源。
+
+## 大型發電廠地圖
+
+國家頁的電廠地圖使用 [WRI Global Power Plant Database](https://datasets.wri.org/dataset/globalpowerplantdatabase)（v1.3, 2021, CC BY 4.0），篩選裝置容量 ≥100MW 的電廠，依國家產出 `public/data/plants/{ISO3}.json`。地圖以 Leaflet + OpenStreetMap/CARTO 底圖呈現。此資料為 2021 凍結版，重建指令：`npm run plants`。

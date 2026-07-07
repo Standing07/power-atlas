@@ -1,0 +1,1 @@
+{"iso3":"MDA","count":2,"byFuel":{"coal":1,"gas":1},"byTier":{"2GW+":1,"100-500MW":1},"plants":[{"name":"Moldavskaya GRES","mw":2520,"lat":46.6292,"lon":29.9407,"fuel":"coal","tier":"2GW+","year":null},{"name":"CHP CET-2  Chisinau","mw":240,"lat":47.029,"lon":28.893,"fuel":"gas","tier":"100-500MW","year":null}]}
