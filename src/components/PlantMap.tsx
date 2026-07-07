@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { useLang } from '../i18n'
-import { loadPlants, type Plant } from '../lib/data'
+import { loadPlants, type Plant, type PlantSource } from '../lib/data'
 import { ENERGY_COLORS, ENERGY_LABEL_KEYS, fmt } from '../lib/energy'
 
 const TIERS = ['2GW+', '1-2GW', '500MW-1GW', '100-500MW'] as const
@@ -13,6 +13,7 @@ const FUEL_ORDER = ['coal', 'gas', 'oil', 'nuclear', 'hydro', 'wind', 'solar', '
 export default function PlantMap({ iso3 }: { iso3: string }) {
   const { t } = useLang()
   const [plants, setPlants] = useState<Plant[] | null>(null)
+  const [source, setSource] = useState<PlantSource | null>(null)
   const [missing, setMissing] = useState(false)
   const [activeTier, setActiveTier] = useState<string | null>(null)
   const mapEl = useRef<HTMLDivElement>(null)
@@ -22,7 +23,7 @@ export default function PlantMap({ iso3 }: { iso3: string }) {
   useEffect(() => {
     setPlants(null)
     setMissing(false)
-    loadPlants(iso3).then((d) => setPlants(d.plants)).catch(() => setMissing(true))
+    loadPlants(iso3).then((d) => { setPlants(d.plants); setSource(d.source) }).catch(() => setMissing(true))
   }, [iso3])
 
   const fuelsPresent = useMemo(() => {
@@ -122,7 +123,15 @@ export default function PlantMap({ iso3 }: { iso3: string }) {
         ))}
         <span className="ml-auto text-[11px] text-stone-400">{t('plants_size_note')}</span>
       </div>
-      <p className="border-t border-stone-100 px-4 py-2 text-center text-[11px] text-stone-400">{t('plants_source')}</p>
+      <p className="border-t border-stone-100 px-4 py-2 text-center text-[11px] text-stone-400">
+        {t('plants_source')}：
+        {source ? (
+          <a href={source.url} target="_blank" rel="noreferrer" className="text-brand-600 hover:underline">
+            {source.label} ↗
+          </a>
+        ) : '—'}
+        {' · '}{t('plants_basemap')}
+      </p>
     </div>
   )
 }

@@ -25,9 +25,15 @@ export interface Plant {
   tier: string
   year: number | null
 }
+export interface PlantSource {
+  label: string
+  url: string
+  year: number
+}
 export interface CountryPlants {
   iso3: string
   count: number
+  source: PlantSource
   byFuel: Record<string, number>
   byTier: Record<string, number>
   plants: Plant[]

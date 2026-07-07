@@ -1,1 +1,1 @@
-{"iso3":"GIN","count":1,"byFuel":{"hydro":1},"byTier":{"100-500MW":1},"plants":[{"name":"Kaleta","mw":240,"lat":10.4627,"lon":-13.2765,"fuel":"hydro","tier":"100-500MW","year":null}]}
+{"iso3":"GIN","count":1,"source":{"label":"WRI Global Power Plant Database v1.3","url":"https://datasets.wri.org/dataset/globalpowerplantdatabase","year":2021},"byFuel":{"hydro":1},"byTier":{"100-500MW":1},"plants":[{"name":"Kaleta","mw":240,"lat":10.4627,"lon":-13.2765,"fuel":"hydro","tier":"100-500MW","year":null}]}

@@ -29,7 +29,7 @@ function buildContent(live: LiveExamples) {
       ['地熱、離岸/陸域風電拆分', 'IRENA（國際再生能源總署）統計。IRENA 年份較 Ember 晚一至兩年時，較新年份沿用最近一年的拆分「比例」估計，圖上會標註。'],
       ['能源自給率', `以 OWID 資料估算：本國生產能源（煤、油、氣＋核能與再生能源）÷ 一次能源總消費（替代法）。與各國官方數字可能有差異——例如台灣官方（能源署）以進口能源占能源供給計算約 96–97%（核燃料視為進口），本站以替代法估算的自產比例目前為 ${live.twnSelf}%（隨資料每月更新），兩者口徑不同、結論一致：台灣能源高度依賴進口。`],
       ['台灣部門用電與用電大戶、企業綠電', '人工整理自經濟部能源署、台電、各公司永續報告、RE100 與媒體報導，每筆資料都標註來源與年份。'],
-      ['大型發電廠地圖', 'WRI 全球電廠資料庫（Global Power Plant Database v1.3, 2021），收錄各國裝置容量 100MW 以上的發電廠座標、容量與燃料別；地圖底圖為 OpenStreetMap／CARTO。此為 2021 年凍結版本，大型化石與核能、水力電廠變動不大，較新的風光電廠可能未收錄。'],
+      ['大型發電廠地圖', '收錄各國裝置容量 100MW 以上的發電廠座標、容量與燃料別，每個國家的地圖底部都標明資料來源與年份。美國採用 EIA-860M（每月更新、公有領域，資料最新）；其餘國家採用 WRI 全球電廠資料庫 v1.3（2021）——大型化石、核能、水力電廠變動不大，較新的風光電廠可能未收錄。我們會逐步以更新的官方來源（如 GEM）替換較舊的國家。地圖底圖為 OpenStreetMap／CARTO。'],
     ],
     glossaryTitle: '名詞小辭典',
     glossary: [
@@ -60,7 +60,7 @@ function buildContent(live: LiveExamples) {
       ['Geothermal and onshore/offshore wind split', 'IRENA statistics. Where IRENA lags Ember by a year or two, the most recent split ratio is carried forward as an estimate (marked on charts).'],
       ['Energy self-sufficiency', `Estimated from OWID data: domestic energy production (coal, oil, gas + nuclear and renewables) ÷ total primary energy consumption (substitution method). May differ from official national figures — e.g. Taiwan officially reports ~96–97% import dependence (counting nuclear fuel as imported), while our substitution-method estimate of domestic production is currently ${live.twnSelf}% (refreshed monthly); different methods, same conclusion.`],
       ['Taiwan sector/company data, corporate clean power', 'Hand-compiled from Taiwan’s Energy Administration, Taipower, corporate sustainability reports, RE100 and media coverage — every figure carries its source and year.'],
-      ['Major power plants map', 'WRI Global Power Plant Database (v1.3, 2021): location, capacity and fuel of plants ≥100 MW; basemap by OpenStreetMap/CARTO. This is a 2021 frozen release — large fossil, nuclear and hydro plants are stable, but recent wind/solar additions may be missing.'],
+      ['Major power plants map', 'Location, capacity and fuel of plants ≥100 MW, with each country’s source and year shown on its map. The US uses EIA-860M (updated monthly, public domain — the most current); other countries use the WRI Global Power Plant Database v1.3 (2021) — large fossil, nuclear and hydro plants are stable, but recent wind/solar may be missing. We are progressively replacing older countries with fresher official sources (e.g. GEM). Basemap by OpenStreetMap/CARTO.'],
     ],
     glossaryTitle: 'Glossary',
     glossary: [

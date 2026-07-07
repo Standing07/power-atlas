@@ -1,1 +1,1 @@
-{"iso3":"GNQ","count":1,"byFuel":{"hydro":1},"byTier":{"100-500MW":1},"plants":[{"name":"Djibloho","mw":120,"lat":1.5758,"lon":10.4687,"fuel":"hydro","tier":"100-500MW","year":null}]}
+{"iso3":"GNQ","count":1,"source":{"label":"WRI Global Power Plant Database v1.3","url":"https://datasets.wri.org/dataset/globalpowerplantdatabase","year":2021},"byFuel":{"hydro":1},"byTier":{"100-500MW":1},"plants":[{"name":"Djibloho","mw":120,"lat":1.5758,"lon":10.4687,"fuel":"hydro","tier":"100-500MW","year":null}]}

@@ -1,1 +1,1 @@
-{"iso3":"MDG","count":1,"byFuel":{"coal":1},"byTier":{"100-500MW":1},"plants":[{"name":"Ambatovy","mw":120,"lat":-18.8356,"lon":48.3125,"fuel":"coal","tier":"100-500MW","year":null}]}
+{"iso3":"MDG","count":1,"source":{"label":"WRI Global Power Plant Database v1.3","url":"https://datasets.wri.org/dataset/globalpowerplantdatabase","year":2021},"byFuel":{"coal":1},"byTier":{"100-500MW":1},"plants":[{"name":"Ambatovy","mw":120,"lat":-18.8356,"lon":48.3125,"fuel":"coal","tier":"100-500MW","year":null}]}

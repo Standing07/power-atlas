@@ -1,1 +1,1 @@
-{"iso3":"DJI","count":1,"byFuel":{"oil":1},"byTier":{"100-500MW":1},"plants":[{"name":"Boulaos","mw":107,"lat":11.5759,"lon":43.1569,"fuel":"oil","tier":"100-500MW","year":null}]}
+{"iso3":"DJI","count":1,"source":{"label":"WRI Global Power Plant Database v1.3","url":"https://datasets.wri.org/dataset/globalpowerplantdatabase","year":2021},"byFuel":{"oil":1},"byTier":{"100-500MW":1},"plants":[{"name":"Boulaos","mw":107,"lat":11.5759,"lon":43.1569,"fuel":"oil","tier":"100-500MW","year":null}]}

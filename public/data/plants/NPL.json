@@ -1,1 +1,1 @@
-{"iso3":"NPL","count":1,"byFuel":{"hydro":1},"byTier":{"100-500MW":1},"plants":[{"name":"Kali Gandaki Hydroelectric Power Plant Nepal","mw":144,"lat":27.976,"lon":83.568,"fuel":"hydro","tier":"100-500MW","year":null}]}
+{"iso3":"NPL","count":1,"source":{"label":"WRI Global Power Plant Database v1.3","url":"https://datasets.wri.org/dataset/globalpowerplantdatabase","year":2021},"byFuel":{"hydro":1},"byTier":{"100-500MW":1},"plants":[{"name":"Kali Gandaki Hydroelectric Power Plant Nepal","mw":144,"lat":27.976,"lon":83.568,"fuel":"hydro","tier":"100-500MW","year":null}]}

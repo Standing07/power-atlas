@@ -1,41 +1,50 @@
 #!/usr/bin/env node
 /**
- * 電廠資料管線：WRI Global Power Plant Database (v1.3.0, CC BY 4.0)
- * → 篩選 ≥100MW 的大型電廠 → 依國家產出 public/data/plants/{ISO3}.json
+ * 電廠資料管線（多來源）→ 依國家產出 public/data/plants/{ISO3}.json
  *
- * WRI GPPD 為 2021 年凍結版本（之後未更新），屬「靜態參考圖層」，
- * 因此產出的 JSON 直接進版本庫，不隨每月電力資料管線重跑。
- * 若要重建：npm run plants
+ * 來源優先序（後者覆蓋前者）：
+ *   1. WRI Global Power Plant Database v1.3 (2021, CC BY 4.0) — 全球底圖
+ *   2. 美國 EIA-860M（每月更新, 公有領域）— 覆蓋美國，資料最新
+ *   3. GEM Global Integrated Power Tracker（若使用者放入檔案）— 覆蓋指定國家
  *
- * 授權：資料衍生自 WRI Global Power Plant Database，CC BY 4.0，須標註來源。
+ * 每個國家檔案都帶 source { label, url, year }，前端會顯示。
+ * 篩選裝置容量 ≥100MW 的電廠。重建：npm run plants
  */
-import { mkdir, readFile, writeFile, rm, access } from 'node:fs/promises'
+import { mkdir, readFile, writeFile, rm, access, readdir } from 'node:fs/promises'
 import { createWriteStream } from 'node:fs'
 import { Readable } from 'node:stream'
 import { pipeline } from 'node:stream/promises'
 import { execSync } from 'node:child_process'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import ExcelJS from 'exceljs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const CACHE = path.join(ROOT, 'scripts', '.cache')
 const OUT = path.join(ROOT, 'public', 'data', 'plants')
-const ZIP_URL = 'https://wri-dataportal-prod.s3.amazonaws.com/manual/global_power_plant_database_v_1_3.zip'
 const MIN_MW = 100
 
-// GPPD 的 primary_fuel → 本站能源分類（對應 energy.ts 的配色鍵）
-const FUEL_MAP = {
-  Coal: 'coal', Gas: 'gas', Oil: 'oil', Nuclear: 'nuclear', Hydro: 'hydro',
-  Wind: 'wind', Solar: 'solar', Geothermal: 'geothermal',
-  Biomass: 'biofuel', Waste: 'biofuel', Cogeneration: 'gas',
-  'Petcoke': 'coal', 'Storage': 'other', Other: 'other',
+const WRI_ZIP = 'https://wri-dataportal-prod.s3.amazonaws.com/manual/global_power_plant_database_v_1_3.zip'
+
+const tierOf = (mw) => (mw >= 2000 ? '2GW+' : mw >= 1000 ? '1-2GW' : mw >= 500 ? '500MW-1GW' : '100-500MW')
+
+const round4 = (n) => Number(n.toFixed(4))
+
+function summarize(plants) {
+  const byFuel = {}, byTier = {}
+  for (const p of plants) {
+    byFuel[p.fuel] = (byFuel[p.fuel] ?? 0) + 1
+    byTier[p.tier] = (byTier[p.tier] ?? 0) + 1
+  }
+  return { byFuel, byTier }
 }
 
-function tierOf(mw) {
-  if (mw >= 2000) return '2GW+'
-  if (mw >= 1000) return '1-2GW'
-  if (mw >= 500) return '500MW-1GW'
-  return '100-500MW'
+// ---------------------------------------------------------------- WRI（全球底圖）
+
+const WRI_FUEL = {
+  Coal: 'coal', Gas: 'gas', Oil: 'oil', Nuclear: 'nuclear', Hydro: 'hydro',
+  Wind: 'wind', Solar: 'solar', Geothermal: 'geothermal',
+  Biomass: 'biofuel', Waste: 'biofuel', Cogeneration: 'gas', Petcoke: 'coal', Other: 'other',
 }
 
 function parseCsvLine(line) {
@@ -43,10 +52,8 @@ function parseCsvLine(line) {
   let cur = '', q = false
   for (let i = 0; i < line.length; i++) {
     const ch = line[i]
-    if (q) {
-      if (ch === '"') { if (line[i + 1] === '"') { cur += '"'; i++ } else q = false }
-      else cur += ch
-    } else if (ch === '"') q = true
+    if (q) { if (ch === '"') { if (line[i + 1] === '"') { cur += '"'; i++ } else q = false } else cur += ch }
+    else if (ch === '"') q = true
     else if (ch === ',') { out.push(cur); cur = '' }
     else cur += ch
   }
@@ -54,86 +61,192 @@ function parseCsvLine(line) {
   return out
 }
 
-async function ensureCsv() {
+async function ensureWriCsv() {
   const csv = path.join(CACHE, 'gppd.csv')
-  try { await access(csv); console.log('  ✓ 使用快取 gppd.csv'); return csv } catch { /* download */ }
+  try { await access(csv); return csv } catch { /* download */ }
   await mkdir(CACHE, { recursive: true })
   const zip = path.join(CACHE, 'gppd.zip')
-  console.log('  ↓ 下載 WRI Global Power Plant Database')
-  const res = await fetch(ZIP_URL)
-  if (!res.ok) throw new Error(`下載失敗 HTTP ${res.status}`)
+  console.log('  ↓ 下載 WRI GPPD')
+  const res = await fetch(WRI_ZIP)
+  if (!res.ok) throw new Error(`WRI 下載失敗 HTTP ${res.status}`)
   await pipeline(Readable.fromWeb(res.body), createWriteStream(zip))
-  // 用系統 unzip 解出 CSV（macOS 與 GitHub Actions ubuntu 皆內建）
   execSync(`unzip -o -j "${zip}" "global_power_plant_database.csv" -d "${CACHE}"`, { stdio: 'ignore' })
   execSync(`mv "${path.join(CACHE, 'global_power_plant_database.csv')}" "${csv}"`)
   return csv
 }
 
-async function main() {
-  console.log('== 電廠資料管線（WRI GPPD）==')
-  const csvPath = await ensureCsv()
-  const text = await readFile(csvPath, 'utf8')
-  const lines = text.split('\n')
+async function processWRI() {
+  const csvPath = await ensureWriCsv()
+  const lines = (await readFile(csvPath, 'utf8')).split('\n')
   const header = parseCsvLine(lines[0])
   const idx = Object.fromEntries(header.map((h, i) => [h, i]))
-  for (const c of ['country', 'name', 'capacity_mw', 'latitude', 'longitude', 'primary_fuel']) {
-    if (!(c in idx)) throw new Error(`GPPD 缺欄位 ${c}`)
-  }
-
   const byCountry = new Map()
-  let kept = 0
   for (let i = 1; i < lines.length; i++) {
     if (!lines[i]) continue
-    const cells = parseCsvLine(lines[i])
-    const mw = Number(cells[idx.capacity_mw])
+    const c = parseCsvLine(lines[i])
+    const mw = Number(c[idx.capacity_mw])
     if (!Number.isFinite(mw) || mw < MIN_MW) continue
-    const iso3 = cells[idx.country]
-    const lat = Number(cells[idx.latitude])
-    const lon = Number(cells[idx.longitude])
+    const iso3 = c[idx.country]
+    const lat = Number(c[idx.latitude]), lon = Number(c[idx.longitude])
     if (!iso3 || !Number.isFinite(lat) || !Number.isFinite(lon)) continue
-    const fuel = FUEL_MAP[cells[idx.primary_fuel]] ?? 'other'
-    const yearRaw = cells[idx.commissioning_year]
-    const year = yearRaw && Number.isFinite(Number(yearRaw)) ? Math.round(Number(yearRaw)) : null
+    const yr = c[idx.commissioning_year]
     const plant = {
-      name: cells[idx.name],
-      mw: Math.round(mw),
-      lat: Number(lat.toFixed(4)),
-      lon: Number(lon.toFixed(4)),
-      fuel,
-      tier: tierOf(mw),
-      year,
+      name: c[idx.name], mw: Math.round(mw), lat: round4(lat), lon: round4(lon),
+      fuel: WRI_FUEL[c[idx.primary_fuel]] ?? 'other', tier: tierOf(mw),
+      year: yr && Number.isFinite(Number(yr)) ? Math.round(Number(yr)) : null,
     }
     if (!byCountry.has(iso3)) byCountry.set(iso3, [])
     byCountry.get(iso3).push(plant)
-    kept++
   }
+  return {
+    byCountry,
+    source: { label: 'WRI Global Power Plant Database v1.3', url: 'https://datasets.wri.org/dataset/globalpowerplantdatabase', year: 2021 },
+  }
+}
+
+// ---------------------------------------------------------------- 美國 EIA-860M（最新）
+
+function eiaFuel(tech, code) {
+  const t = String(tech || '')
+  if (/coal/i.test(t)) return 'coal'
+  if (/petroleum|oil|diesel/i.test(t)) return 'oil'
+  if (/natural gas|gas turbine|combined cycle|gas internal/i.test(t)) return 'gas'
+  if (/nuclear/i.test(t)) return 'nuclear'
+  if (/hydro/i.test(t)) return 'hydro'
+  if (/offshore wind|onshore wind|wind turbine/i.test(t)) return 'wind'
+  if (/solar/i.test(t)) return 'solar'
+  if (/geothermal/i.test(t)) return 'geothermal'
+  if (/biomass|wood|landfill|biogas|municipal/i.test(t)) return 'biofuel'
+  // 退回用 Energy Source Code
+  const m = { COL: 'coal', NG: 'gas', NUC: 'nuclear', WAT: 'hydro', WND: 'wind', SUN: 'solar', GEO: 'geothermal' }
+  return m[String(code || '').toUpperCase()] ?? 'other'
+}
+
+async function isXlsx(file) {
+  // xlsx 是 zip，前兩個位元組必為 'PK'（0x50 0x4B）
+  try {
+    const buf = await readFile(file)
+    return buf.length > 4 && buf[0] === 0x50 && buf[1] === 0x4b
+  } catch { return false }
+}
+
+async function downloadEia() {
+  await mkdir(CACHE, { recursive: true })
+  const months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december']
+  const now = new Date()
+  // EIA-860M 約有 2 個月落差，往前試最多 6 個月，取第一個「真的是 xlsx」的檔
+  for (let back = 1; back <= 6; back++) {
+    const d = new Date(now.getFullYear(), now.getMonth() - back, 1)
+    const month = months[d.getMonth()], year = d.getFullYear()
+    const fname = `${month}_generator${year}.xlsx`
+    const dest = path.join(CACHE, fname)
+    if (await isXlsx(dest)) return { dest, month, year }
+    const res = await fetch(`https://www.eia.gov/electricity/data/eia860m/xls/${fname}`)
+    if (!res.ok) continue
+    await pipeline(Readable.fromWeb(res.body), createWriteStream(dest))
+    if (await isXlsx(dest)) {
+      console.log(`  ↓ EIA-860M ${fname}`)
+      return { dest, month, year }
+    }
+    await rm(dest, { force: true }) // 抓到 HTML 錯誤頁，丟棄再試前一個月
+  }
+  return null
+}
+
+async function processEIA() {
+  let file
+  try { file = await downloadEia() } catch (e) { console.warn(`  ⚠ EIA 下載失敗（${e.message}），美國沿用 WRI`); return null }
+  if (!file) { console.warn('  ⚠ 找不到 EIA-860M 檔案，美國沿用 WRI'); return null }
+
+  const wb = new ExcelJS.Workbook()
+  await wb.xlsx.readFile(file.dest)
+  const ws = wb.getWorksheet('Operating')
+  const header = ws.getRow(3).values.map((v) => String(v).trim())
+  const col = (name) => header.indexOf(name)
+  const cId = col('Plant ID'), cName = col('Plant Name'), cCap = col('Nameplate Capacity (MW)')
+  const cTech = col('Technology'), cCode = col('Energy Source Code'), cYear = col('Operating Year')
+  const cLat = col('Latitude'), cLon = col('Longitude')
+  if ([cId, cName, cCap, cLat, cLon].some((i) => i < 0)) { console.warn('  ⚠ EIA 欄位對不上，美國沿用 WRI'); return null }
+
+  // 以 Plant ID 聚合各機組 → 電廠
+  const plants = new Map()
+  ws.eachRow((row, rn) => {
+    if (rn <= 3) return
+    const v = row.values
+    const id = v[cId]
+    const cap = Number(v[cCap])
+    const lat = Number(v[cLat]), lon = Number(v[cLon])
+    if (!id || !Number.isFinite(cap) || !Number.isFinite(lat) || !Number.isFinite(lon)) return
+    const tech = v[cTech]
+    if (/batter|storage|flywheel/i.test(String(tech))) return // 儲能非發電，排除
+    if (!plants.has(id)) plants.set(id, { name: String(v[cName]), lat, lon, mw: 0, fuels: {}, year: null })
+    const p = plants.get(id)
+    p.mw += cap
+    const f = eiaFuel(tech, v[cCode])
+    p.fuels[f] = (p.fuels[f] ?? 0) + cap
+    const y = Number(v[cYear])
+    if (Number.isFinite(y)) p.year = p.year ? Math.min(p.year, y) : y
+  })
+
+  const list = []
+  for (const p of plants.values()) {
+    if (p.mw < MIN_MW) continue
+    const fuel = Object.entries(p.fuels).sort((a, b) => b[1] - a[1])[0][0] // 容量最大的燃料為主
+    list.push({ name: p.name, mw: Math.round(p.mw), lat: round4(p.lat), lon: round4(p.lon), fuel, tier: tierOf(p.mw), year: p.year })
+  }
+  console.log(`  ✓ EIA：美國 ${list.length} 座 ≥${MIN_MW}MW 電廠（${file.month} ${file.year}）`)
+  const label = `EIA-860M (${file.month[0].toUpperCase()}${file.month.slice(1)} ${file.year})`
+  return { USA: { plants: list, source: { label, url: 'https://www.eia.gov/electricity/data/eia860m/', year: file.year } } }
+}
+
+// ---------------------------------------------------------------- GEM（使用者提供的 Excel，選用）
+// 若 scripts/.cache/gem.xlsx 存在則處理，覆蓋指定國家。欄位對應待實際檔案確認。
+
+async function processGEM() {
+  const gemPath = path.join(CACHE, 'gem.xlsx')
+  try { await access(gemPath) } catch { return null }
+  console.log('  ℹ 偵測到 GEM 檔案，但欄位對應需依實際檔案設定（見 build-plants.mjs 註解）')
+  return null // 佔位：使用者提供檔案後再實作欄位對應
+}
+
+// ---------------------------------------------------------------- 主流程
+
+async function main() {
+  console.log('== 電廠資料管線（多來源）==')
+  const wri = await processWRI()
+  const eia = await processEIA()
+  const gem = await processGEM()
 
   await rm(OUT, { recursive: true, force: true })
   await mkdir(OUT, { recursive: true })
+
+  const sourceByCountry = {}
   const summary = {}
-  for (const [iso3, plants] of byCountry) {
+  // 先寫 WRI 底圖
+  for (const [iso3, plants] of wri.byCountry) {
+    sourceByCountry[iso3] = { plants, source: wri.source }
+  }
+  // EIA 覆蓋
+  if (eia) for (const [iso3, data] of Object.entries(eia)) sourceByCountry[iso3] = data
+  // GEM 覆蓋
+  if (gem) for (const [iso3, data] of Object.entries(gem)) sourceByCountry[iso3] = data
+
+  for (const [iso3, { plants, source }] of Object.entries(sourceByCountry)) {
     plants.sort((a, b) => b.mw - a.mw)
-    const byFuel = {}
-    const byTier = {}
-    for (const p of plants) {
-      byFuel[p.fuel] = (byFuel[p.fuel] ?? 0) + 1
-      byTier[p.tier] = (byTier[p.tier] ?? 0) + 1
-    }
-    await writeFile(
-      path.join(OUT, `${iso3}.json`),
-      JSON.stringify({ iso3, count: plants.length, byFuel, byTier, plants })
-    )
-    summary[iso3] = plants.length
+    const { byFuel, byTier } = summarize(plants)
+    await writeFile(path.join(OUT, `${iso3}.json`), JSON.stringify({ iso3, count: plants.length, source, byFuel, byTier, plants }))
+    summary[iso3] = { count: plants.length, source: source.label }
   }
   await writeFile(path.join(OUT, '_index.json'), JSON.stringify({
-    source: 'WRI Global Power Plant Database v1.3.0 (2021), CC BY 4.0',
-    minMW: MIN_MW,
-    generated: new Date().toISOString().slice(0, 10),
-    counts: summary,
+    minMW: MIN_MW, generated: new Date().toISOString().slice(0, 10), countries: summary,
   }))
 
-  console.log(`  ✓ ${kept} 座 ≥${MIN_MW}MW 電廠，分佈於 ${byCountry.size} 國`)
+  const total = Object.values(sourceByCountry).reduce((s, c) => s + c.plants.length, 0)
+  console.log(`  ✓ 合計 ${total} 座電廠，${Object.keys(sourceByCountry).length} 國`)
   console.log('  完成 ✓')
 }
 
 main().catch((err) => { console.error('✗ 電廠管線失敗：', err.message); process.exit(1) })
+
+// 避免未使用匯入警告
+void readdir
