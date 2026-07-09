@@ -1,0 +1,153 @@
+{
+  "_comment": "各國官方發電規劃與政策大事記：人工查證自官方文件與權威報導，逐筆附來源。更新時務必查證。",
+  "countries": {
+    "TWN": {
+      "plan": [
+        {
+          "text": { "zh": "經濟部規劃 2030 年電力配比：燃氣 50%、再生能源 27–30%、燃煤 20%（淨零轉型階段目標：2030 再生能源達 30%）。", "en": "The MOEA targets a 2030 power mix of 50% gas, 27–30% renewables and 20% coal (with 30% renewables as the net-zero interim goal)." },
+          "source": { "label": "經濟部／行政院（2024）", "url": "https://www.ey.gov.tw/File/D3AAA937ED1EEB09" }
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2025.05",
+          "title": { "zh": "核管法修法通過", "en": "Nuclear Reactor Facilities Regulation Act amended" },
+          "text": { "zh": "立法院三讀通過修法，核電廠運轉年限可延至 60 年，且停機後仍可申請再運轉——為延役開啟法制大門。", "en": "The Legislative Yuan extended reactor licenses to up to 60 years and allowed restart applications after shutdown — opening the legal door to life extensions." },
+          "source": { "label": "台灣事實查核中心", "url": "https://tfc-taiwan.org.tw/third-nuclear-plant-referendum-aug-23-key-points/" }
+        },
+        {
+          "date": "2025.05",
+          "title": { "zh": "最後一部核電機組停機", "en": "Last nuclear reactor shut down" },
+          "text": { "zh": "核三廠 2 號機除役，台灣正式進入「非核家園」，核電歸零。", "en": "Maanshan Unit 2 was retired, making Taiwan formally nuclear-free." },
+          "source": { "label": "公視新聞", "url": "https://news.pts.org.tw/curation/136" }
+        },
+        {
+          "date": "2025.08",
+          "title": { "zh": "核三重啟公投未過門檻", "en": "Nuclear restart referendum falls short" },
+          "text": { "zh": "823 公投：434 萬同意 vs 151 萬不同意，同意遠多於不同意，但未達 500 萬有效同意門檻而未通過；政府隨後表示將制定核電安全審查辦法。", "en": "The Aug 23 referendum drew 4.34M yes vs 1.51M no — a wide margin, but below the 5M threshold to pass; the government then pledged a nuclear safety-review framework." },
+          "source": { "label": "報導者（2025）", "url": "https://www.twreporter.org/a/referendum-to-restart-maanshan-nuclear-power-plant-result" }
+        }
+      ]
+    },
+    "JPN": {
+      "plan": [
+        {
+          "text": { "zh": "第七次能源基本計畫（2025 年 2 月內閣決定）：2040 年度再生能源 40–50%（太陽 23–29%、風 4–8%、水力 8–10%、地熱 1–2%、生質 5–6%）、核能約 20%、火力 30–40%。", "en": "The 7th Strategic Energy Plan (Cabinet-approved Feb 2025) targets FY2040: 40–50% renewables (solar 23–29%, wind 4–8%, hydro 8–10%, geothermal 1–2%, biomass 5–6%), ~20% nuclear, 30–40% thermal." },
+          "source": { "label": "METI／IEA（2025）", "url": "https://www.iea.org/policies/25689-seventh-strategic-energy-plan" }
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2025.02",
+          "title": { "zh": "核能政策大轉向：從「減依賴」到「最大化利用」", "en": "Nuclear pivot: from 'reduce dependence' to 'maximum use'" },
+          "text": { "zh": "第七次能源基本計畫刪除了沿用多年的「盡可能降低核依賴」措辭，改為「最大限度利用」核電——福島事故以來最大的政策轉向。", "en": "The 7th plan dropped the long-standing pledge to 'reduce nuclear dependence as much as possible' in favor of 'maximum use' — the biggest policy shift since Fukushima." },
+          "source": { "label": "Nippon.com（2025）", "url": "https://www.nippon.com/en/in-depth/d01195/" }
+        }
+      ]
+    },
+    "KOR": {
+      "plan": [
+        {
+          "text": { "zh": "第 11 次電力供需基本計畫（2025 年 2 月確定，涵蓋至 2038）：核能佔比 2030 年 31.8%→2038 年 35.2%，再生能源 2030 年 18.8%→2038 年 29.2%；無碳電力（核＋再生）2038 年達 70.7%（2023 年僅 39.1%）。", "en": "The 11th Basic Electricity Plan (confirmed Feb 2025, to 2038): nuclear 31.8% (2030) → 35.2% (2038); renewables 18.8% → 29.2%; carbon-free power reaching 70.7% by 2038 (vs 39.1% in 2023)." },
+          "source": { "label": "MOTIE／Enerdata（2025）", "url": "https://www.enerdata.net/publications/daily-energy-news/south-korea-new-nuclear-renewable-power-plan.html" }
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2025.02",
+          "title": { "zh": "拍板新建三座核電機組", "en": "Three new nuclear units approved" },
+          "text": { "zh": "計畫新增新韓蔚 3、4 號大型機組（合計 2.8GW，2038 年前後）與一座 700MW 小型模組化反應爐（SMR，2036 年目標）——韓國以核電為減碳主力。", "en": "The plan adds Shin-Hanul units 3&4 (2.8 GW combined, around 2038) and a 700 MW SMR targeted for 2036 — putting nuclear at the center of Korea's decarbonization." },
+          "source": { "label": "Nuclear Engineering International（2025）", "url": "https://www.neimagazine.com/news/south-korea-unveils-nuclear-development-plan/" }
+        }
+      ]
+    },
+    "CHN": {
+      "plan": [
+        {
+          "text": { "zh": "2035 年 NDC（2025 年 9 月習近平於聯合國宣布）：風電＋太陽能裝置容量達 3,600GW（2020 年的 6 倍以上）、非化石能源佔一次能源消費超過 30%、全經濟體淨排放較峰值下降 7–10%。", "en": "China's 2035 NDC (announced by Xi Jinping at the UN, Sept 2025): 3,600 GW of wind + solar (6× the 2020 level), non-fossil >30% of primary energy, and a 7–10% cut in net emissions from peak." },
+          "source": { "label": "Carbon Brief／WRI（2025）", "url": "https://www.carbonbrief.org/qa-what-does-chinas-new-paris-agreement-pledge-mean-for-climate-action/" }
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2024",
+          "title": { "zh": "提前 6 年達成 1200GW 風光目標", "en": "1,200 GW wind+solar goal hit six years early" },
+          "text": { "zh": "原訂 2030 年的風光 1200GW 目標在 2024 年就達成；2025 年化石燃料發電更出現 2015 年以來首度下降。", "en": "The 2030 target of 1,200 GW wind+solar was reached in 2024; in 2025 fossil generation fell for the first time since 2015." },
+          "source": { "label": "Ember（2025–2026）", "url": "https://ember-energy.org/latest-insights/global-electricity-review-2026/" }
+        },
+        {
+          "date": "2025.09",
+          "title": { "zh": "首次提出全經濟體絕對減排目標", "en": "First economy-wide absolute emissions target" },
+          "text": { "zh": "新 NDC 是中國首次承諾「絕對量」減排（較峰值 -7~10%），並於 11 月正式提交聯合國；分析機構多認為目標保守、現行政策即可達成。", "en": "The new NDC is China's first absolute-reduction pledge (7–10% below peak), formally submitted in November; analysts broadly view it as conservative and achievable under current policies." },
+          "source": { "label": "Climate Action Tracker（2025）", "url": "https://climateactiontracker.org/countries/china/2035-ndc/" }
+        }
+      ]
+    },
+    "USA": {
+      "plan": [
+        {
+          "text": { "zh": "聯邦層級沒有電力配比目標；2025 年政策轉向化石與核能優先。EIA 預測資料中心需求仍將推動太陽能與儲能持續成長（見「未來展望」）。", "en": "There is no federal generation-mix target; 2025 policy pivoted toward fossil fuels and nuclear. The EIA still projects solar and storage growth on data-center demand (see Outlook)." },
+          "source": { "label": "EIA（2025–2026）", "url": "https://www.eia.gov/electricity/data/eia860m/" }
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2025.07",
+          "title": { "zh": "OBBBA 法案：風光稅收抵免加速落日", "en": "OBBBA: wind & solar tax credits sunset early" },
+          "text": { "zh": "7 月 4 日簽署的《One Big Beautiful Bill》讓風電與太陽能的 ITC/PTC 稅收抵免於 2027 年底後失效（2026 年 7 月前開工的專案可豁免）；7 月 7 日再以行政命令要求嚴格執行——衝擊美國再生能源投資。", "en": "Signed July 4, the One Big Beautiful Bill ends wind/solar ITC/PTC credits for projects placed in service after 2027 (those starting construction by July 2026 are grandfathered); a July 7 executive order demands strict enforcement — a blow to US renewables investment." },
+          "source": { "label": "Sidley／Norton Rose Fulbright（2025）", "url": "https://www.sidley.com/en/insights/newsupdates/2025/07/the-one-big-beautiful-bill-act-navigating-the-new-energy-landscape" }
+        }
+      ]
+    },
+    "VNM": {
+      "plan": [
+        {
+          "text": { "zh": "PDP8 修訂版（2025 年 4 月核定）2030 年裝置容量目標：太陽能 46.5GW（原 12.8GW 大幅上修）、陸域/近岸風電 26–38GW、離岸風電 17GW（原 6GW）、儲能 10–16.3GW（原僅 0.3GW）。", "en": "The revised PDP8 (approved April 2025) 2030 capacity targets: solar 46.5 GW (up from 12.8), onshore/nearshore wind 26–38 GW, offshore wind 17 GW (from 6), and storage 10–16.3 GW (from just 0.3)." },
+          "source": { "label": "Decision 768／KPMG（2025）", "url": "https://kpmg.com/vn/en/home/insights/2025/07/revised-pdp-8.html" }
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2025.04",
+          "title": { "zh": "核電重返計畫：寧順一、二廠", "en": "Nuclear returns: Ninh Thuan 1 & 2" },
+          "text": { "zh": "修訂版 PDP8 重新納入核電——寧順 1、2 廠合計 4–6.4GW，目標 2030–2035 年間投運（原計畫 2016 年曾喊停）。", "en": "The revised PDP8 reinstates nuclear: Ninh Thuan 1 & 2 (4–6.4 GW combined) targeted for 2030–2035, reviving a project shelved in 2016." },
+          "source": { "label": "US-ABC／DFDL（2025）", "url": "https://www.dfdl.com/insights/legal-and-tax-updates/vietnam-pdp-8-revised-vietnams-2030-installed-power-capacity-targets/" }
+        }
+      ]
+    },
+    "IND": {
+      "plan": [
+        {
+          "text": { "zh": "國家目標：2030 年非化石裝置容量達 500GW（COP26 承諾）。截至 2025 年中，總裝置容量已破 500GW、其中非化石 256GW。", "en": "National goal: 500 GW of non-fossil capacity by 2030 (COP26 pledge). By mid-2025 total capacity passed 500 GW, with 256 GW non-fossil." },
+          "source": { "label": "印度電力部（2025）", "url": "https://powermin.gov.in/en/content/500gw-nonfossil-fuel-target" }
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2025.06",
+          "title": { "zh": "非化石容量過半，提前五年達標", "en": "Non-fossil capacity passes 50%, five years early" },
+          "text": { "zh": "非化石能源佔裝置容量突破 50%，比 NDC 承諾的 2030 年提前五年；7 月 29 日再生能源更創下滿足全國 51.5% 需求的單日紀錄。", "en": "Non-fossil sources crossed 50% of installed capacity five years ahead of the NDC schedule; on July 29 renewables set a single-day record covering 51.5% of demand." },
+          "source": { "label": "DD News／Enerdata（2025）", "url": "https://ddnews.gov.in/en/india-surpasses-500-gw-power-capacity-renewable-energy-meets-over-50-of-demand/" }
+        }
+      ]
+    },
+    "DEU": {
+      "plan": [
+        {
+          "text": { "zh": "2030 年再生能源佔電力消費 80%（EEG 法定目標）：太陽能 200GW（倍增）、離岸風電 30GW；煤退場法定 2038 年、政策上力拚提前至 2030。", "en": "80% renewable electricity by 2030 (statutory EEG target): 200 GW solar (doubled) and 30 GW offshore wind; coal exit legislated for 2038 with policy ambition to advance it to 2030." },
+          "source": { "label": "Clean Energy Wire／S&P Global", "url": "https://www.cleanenergywire.org/factsheets/clew-guide-germany-still-track-2030-climate-targets" }
+        }
+      ],
+      "timeline": []
+    },
+    "AUS": {
+      "plan": [
+        {
+          "text": { "zh": "2030 年電網 82% 再生能源（國家目標）；「容量投資計畫（CIS)」擴大至 40GW 新增容量（含 26GW 再生能源發電）以政府保底收入加速投資。", "en": "82% renewable electricity by 2030 (national target); the Capacity Investment Scheme was expanded to underwrite 40 GW of new capacity (incl. 26 GW of renewable generation)." },
+          "source": { "label": "澳洲氣候變遷暨能源部 DCCEEW", "url": "https://www.dcceew.gov.au/energy/renewable/capacity-investment-scheme" }
+        }
+      ],
+      "timeline": []
+    }
+  }
+}

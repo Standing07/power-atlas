@@ -13,6 +13,7 @@ import insightsData from '../data/country-insights.json'
 import sectorData from '../data/sector-breakdown.json'
 import outlookData from '../data/outlook.json'
 import consumersData from '../data/major-consumers.json'
+import plansData from '../data/country-plans.json'
 import CountrySelect from '../components/CountrySelect'
 import Carousel from '../components/Carousel'
 import PlantMap from '../components/PlantMap'
@@ -194,6 +195,8 @@ export function CountryView({
 
       <ConsumersSection iso3={data.iso3} />
 
+      <PlanSection iso3={data.iso3} />
+
       <OutlookSection iso3={data.iso3} />
 
       <InsightsSection iso3={data.iso3} />
@@ -228,6 +231,48 @@ function SectorSection({ iso3 }: { iso3: string }) {
         {t('source_label')}：{pick(lang as Lang, entry.source.label)} ↗
       </a>
     </section>
+  )
+}
+
+interface TimelineItem { date: string; title: L10n; text: L10n; source: { label: string; url: string } }
+interface CountryPlan { plan: SourcedItem[]; timeline: TimelineItem[] }
+
+/** 官方發電規劃＋政策大事記（人工查證，有資料的國家才顯示） */
+function PlanSection({ iso3 }: { iso3: string }) {
+  const { t, lang } = useLang()
+  const entry = (plansData.countries as Record<string, CountryPlan>)[iso3]
+  if (!entry) return null
+  return (
+    <>
+      {entry.plan.length > 0 && (
+        <section>
+          <h2 className="text-xl font-bold text-stone-900">📜 {t('plan_title')}</h2>
+          <p className="mt-1 text-sm text-stone-500">{t('plan_subtitle')}</p>
+          <div className="mt-4">
+            <SourcedCarousel items={entry.plan} accent />
+          </div>
+        </section>
+      )}
+      {entry.timeline.length > 0 && (
+        <section>
+          <h2 className="text-xl font-bold text-stone-900">📅 {t('timeline_title')}</h2>
+          <p className="mt-1 text-sm text-stone-500">{t('timeline_subtitle')}</p>
+          <ol className="mt-5 space-y-0 border-l-2 border-brand-100 pl-6">
+            {entry.timeline.map((ev, i) => (
+              <li key={i} className="relative pb-7 last:pb-0">
+                <span className="absolute -left-[31px] top-1 h-2.5 w-2.5 rounded-full border-2 border-white bg-brand-500 shadow" />
+                <div className="text-xs font-semibold text-brand-600">{ev.date}</div>
+                <div className="mt-0.5 font-semibold text-stone-800">{pick(lang as Lang, ev.title)}</div>
+                <p className="mt-1 text-sm leading-relaxed text-stone-600">{pick(lang as Lang, ev.text)}</p>
+                <a href={ev.source.url} target="_blank" rel="noreferrer" className="mt-1 inline-block text-xs text-brand-600 hover:underline">
+                  {t('source_label')}：{ev.source.label} ↗
+                </a>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+    </>
   )
 }
 
