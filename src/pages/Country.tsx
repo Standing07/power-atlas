@@ -234,31 +234,60 @@ function SectorSection({ iso3 }: { iso3: string }) {
   )
 }
 
-interface TimelineItem { date: string; title: L10n; text: L10n; source: { label: string; url: string } }
-interface CountryPlan { plan: SourcedItem[]; timeline: TimelineItem[] }
+interface Shift { date: string; title: L10n; text: L10n; source: { label: string; url: string } }
+interface Milestone { year: string; headline?: L10n; items: { k: L10n; v: string }[] }
+interface CountryPlan {
+  roadmap: Milestone[]
+  roadmapSource?: { label: string; url: string }
+  roadmapNote?: L10n
+  shifts: Shift[]
+}
 
-/** 官方發電規劃＋政策大事記（人工查證，有資料的國家才顯示） */
+/** 官方發電規劃路線圖＋近期重大政策轉向（人工查證，有資料的國家才顯示） */
 function PlanSection({ iso3 }: { iso3: string }) {
   const { t, lang } = useLang()
   const entry = (plansData.countries as Record<string, CountryPlan>)[iso3]
   if (!entry) return null
   return (
     <>
-      {entry.plan.length > 0 && (
+      {(entry.roadmap.length > 0 || entry.roadmapNote) && (
         <section>
-          <h2 className="text-xl font-bold text-stone-900">📜 {t('plan_title')}</h2>
+          <h2 className="text-xl font-bold text-stone-900">🧭 {t('plan_title')}</h2>
           <p className="mt-1 text-sm text-stone-500">{t('plan_subtitle')}</p>
-          <div className="mt-4">
-            <SourcedCarousel items={entry.plan} accent />
-          </div>
+          {entry.roadmap.length > 0 && (
+            <div className="mt-4 flex gap-3 overflow-x-auto pb-2 [scrollbar-width:thin]">
+              {entry.roadmap.map((m, i) => (
+                <div key={i} className="flex w-60 shrink-0 flex-col rounded-3xl border border-stone-200 bg-white p-5 shadow-sm">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-2xl font-bold text-brand-600">{m.year}</span>
+                  </div>
+                  {m.headline && <div className="mt-0.5 text-xs font-medium text-stone-500">{pick(lang as Lang, m.headline)}</div>}
+                  <ul className="mt-3 space-y-1.5">
+                    {m.items.map((it, j) => (
+                      <li key={j} className="flex items-baseline justify-between gap-2 text-sm">
+                        <span className="whitespace-pre text-stone-600">{pick(lang as Lang, it.k)}</span>
+                        <span className="font-semibold text-stone-900">{it.v}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          )}
+          {entry.roadmapNote && <p className="mt-3 text-sm leading-relaxed text-stone-600">{pick(lang as Lang, entry.roadmapNote)}</p>}
+          {entry.roadmapSource && (
+            <a href={entry.roadmapSource.url} target="_blank" rel="noreferrer" className="mt-2 inline-block text-xs text-brand-600 hover:underline">
+              {t('source_label')}：{entry.roadmapSource.label} ↗
+            </a>
+          )}
         </section>
       )}
-      {entry.timeline.length > 0 && (
+      {entry.shifts.length > 0 && (
         <section>
-          <h2 className="text-xl font-bold text-stone-900">📅 {t('timeline_title')}</h2>
-          <p className="mt-1 text-sm text-stone-500">{t('timeline_subtitle')}</p>
+          <h2 className="text-xl font-bold text-stone-900">📌 {t('shifts_title')}</h2>
+          <p className="mt-1 text-sm text-stone-500">{t('shifts_subtitle')}</p>
           <ol className="mt-5 space-y-0 border-l-2 border-brand-100 pl-6">
-            {entry.timeline.map((ev, i) => (
+            {entry.shifts.map((ev, i) => (
               <li key={i} className="relative pb-7 last:pb-0">
                 <span className="absolute -left-[31px] top-1 h-2.5 w-2.5 rounded-full border-2 border-white bg-brand-500 shadow" />
                 <div className="text-xs font-semibold text-brand-600">{ev.date}</div>
