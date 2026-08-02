@@ -10,6 +10,7 @@ import Taiwan from './pages/Taiwan'
 import Companies from './pages/Companies'
 import About from './pages/About'
 import Explore from './pages/Explore'
+import AI from './pages/AI'
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
       { path: 'explore', element: <Explore /> },
       { path: 'country/:iso3', element: <Country /> },
       { path: 'taiwan', element: <Taiwan /> },
+      { path: 'ai', element: <AI /> },
       { path: 'companies', element: <Companies /> },
       { path: 'about', element: <About /> },
     ],

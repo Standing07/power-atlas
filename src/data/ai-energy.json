@@ -1,0 +1,86 @@
+{
+  "_comment": "AI 與電力專區的人工整理資料：資料中心用電、成長率對比。逐筆查證附來源。",
+  "global": {
+    "dcTwh2024": 415,
+    "dcShare2024": 1.5,
+    "dcTwh2030": 945,
+    "source": { "label": "IEA — Energy and AI (2025)", "url": "https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai" }
+  },
+  "growthCompare": {
+    "title": { "zh": "全國用電成長 vs 資料中心用電成長", "en": "National demand growth vs data-center growth" },
+    "note": {
+      "zh": "資料中心的成長速度遠高於整體用電——這正是 AI 對電網造成壓力的原因。下表為年均成長率（CAGR）。",
+      "en": "Data centers are growing far faster than overall demand — that is why AI strains the grid. Figures are compound annual growth rates."
+    },
+    "rows": [
+      {
+        "iso3": "WORLD",
+        "name": { "zh": "全球", "en": "World" },
+        "nationalPct": 3.6,
+        "dcPct": 14.7,
+        "period": "2024–2030",
+        "note": { "zh": "全球用電年增 3.6%；資料中心用電 2024→2030 從 415 增至 945 TWh（約年增 14.7%）", "en": "Global demand grows 3.6%/yr; data centers go from 415 to 945 TWh over 2024–2030 (~14.7%/yr)" },
+        "source": { "label": "IEA Electricity 2026 / Energy and AI", "url": "https://www.iea.org/reports/electricity-2026/demand" }
+      },
+      {
+        "iso3": "USA",
+        "name": { "zh": "美國", "en": "United States" },
+        "nationalPct": 2,
+        "dcPct": 13,
+        "period": "2024–2030",
+        "note": { "zh": "全國用電年增約 2%，但約一半的新增需求來自資料中心；資料中心佔全美用電將從 4%（2023）升至 7–12%（2028）", "en": "National demand grows ~2%/yr, yet about half of all new demand comes from data centers; their share rises from 4% (2023) to 7–12% (2028)" },
+        "source": { "label": "IEA Electricity 2026 / EIA", "url": "https://www.iea.org/reports/electricity-2026/demand" }
+      },
+      {
+        "iso3": "CHN",
+        "name": { "zh": "中國", "en": "China" },
+        "nationalPct": 4.9,
+        "dcPct": 17,
+        "period": "2024–2030",
+        "note": { "zh": "全國用電年增 4.9%；資料中心用電預估成長約 170%（約年增 17%）", "en": "National demand grows 4.9%/yr; data-center consumption is projected to rise ~170% (~17%/yr)" },
+        "source": { "label": "IEA Electricity 2026 / Energy and AI", "url": "https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai" }
+      },
+      {
+        "iso3": "IRL",
+        "name": { "zh": "愛爾蘭", "en": "Ireland" },
+        "nationalPct": null,
+        "dcPct": null,
+        "period": "2015–2024",
+        "note": { "zh": "極端案例：資料中心佔全國用電從 5%（2015）暴增到 22%（2024），已超過全國都市家庭用電總和（18%）", "en": "The extreme case: data centers went from 5% of national electricity (2015) to 22% (2024) — more than all urban households combined (18%)" },
+        "source": { "label": "愛爾蘭中央統計局 CSO (2025)", "url": "https://www.cso.ie/en/releasesandpublications/ep/p-dcmec/datacentresmeteredelectricityconsumption2024/keyfindings/" }
+      },
+      {
+        "iso3": "TWN",
+        "name": { "zh": "台灣", "en": "Taiwan" },
+        "nationalPct": null,
+        "dcPct": null,
+        "period": "2024–2030",
+        "note": { "zh": "資料中心目前僅佔全台用電約 0.16%，但台電估 2024–2030 年 AI（含資料中心）將累計新增約 1.85GW 用電；國科會估 AI 算力中心從 2026 年 60MW 增至 2029 年 450MW（6.5 倍）", "en": "Data centers use just ~0.16% of Taiwan's electricity today, but Taipower expects ~1.85 GW of cumulative new AI/data-center load in 2024–2030, and the NSTC projects AI compute centers to grow from 60 MW (2026) to 450 MW (2029) — 6.5×" },
+        "source": { "label": "報導者 / 台電 / 國科會", "url": "https://www.twreporter.org/a/data-center-electricity-demand" }
+      }
+    ]
+  },
+  "context": [
+    {
+      "text": {
+        "zh": "把 AI 算力放進電力尺度：全球現存 AI 超級電腦合計約 2.7GW，其中光是 xAI 的 Colossus 三期就達 783MW——相當於一部大型核能機組的裝置容量。",
+        "en": "Putting AI compute in power terms: the world's existing AI supercomputers total ~2.7 GW, and xAI's Colossus phases 1–3 alone reach 783 MW — about the capacity of a large nuclear unit."
+      },
+      "source": { "label": "Epoch AI (2026)", "url": "https://epoch.ai/data/ai-supercomputers" }
+    },
+    {
+      "text": {
+        "zh": "IEA 指出：到 2030 年，美國光是資料中心的用電，就將超過鋁、鋼、水泥、化學等所有高耗能工業的總和。",
+        "en": "The IEA notes that by 2030, US data centers alone will use more electricity than aluminium, steel, cement, chemicals and all other energy-intensive industries combined."
+      },
+      "source": { "label": "IEA — Energy and AI (2025)", "url": "https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai" }
+    },
+    {
+      "text": {
+        "zh": "先進經濟體到 2030 年約有四分之一的新增電力需求將來自資料中心——這是電網規劃者面對的新變數。",
+        "en": "In advanced economies, about a quarter of all electricity demand growth to 2030 will come from data centers — a new variable for grid planners."
+      },
+      "source": { "label": "IEA Electricity 2026", "url": "https://www.iea.org/reports/electricity-2026/demand" }
+    }
+  ]
+}

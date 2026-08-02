@@ -26,6 +26,7 @@ export default function Layout() {
           <nav className="order-3 flex w-full flex-wrap gap-1 sm:order-2 sm:ml-4 sm:w-auto">
             <NavLink to="/" end className={navCls}>{t('nav_home')}</NavLink>
             <NavLink to="/explore" className={navCls}>{t('nav_explore')}</NavLink>
+            <NavLink to="/ai" className={navCls}>{t('nav_ai')}</NavLink>
             <NavLink to="/companies" className={navCls}>{t('nav_companies')}</NavLink>
             <NavLink to="/about" className={navCls}>{t('nav_about')}</NavLink>
           </nav>
