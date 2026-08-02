@@ -9,8 +9,12 @@
   "growthCompare": {
     "title": { "zh": "全國用電成長 vs 資料中心用電成長", "en": "National demand growth vs data-center growth" },
     "note": {
-      "zh": "資料中心的成長速度遠高於整體用電——這正是 AI 對電網造成壓力的原因。下表為年均成長率（CAGR）。",
-      "en": "Data centers are growing far faster than overall demand — that is why AI strains the grid. Figures are compound annual growth rates."
+      "zh": "資料中心成長遠快於整體用電，這是 AI 壓迫電網的主因。但只看百分比會誤導——中國成長率雖高於美國，美國新增的「電量」其實更多。因此下方同時列出絕對增量（TWh）。",
+      "en": "Data centers grow far faster than overall demand — the core reason AI strains grids. But percentages alone mislead: China's growth rate beats the US, yet the US adds more electricity in absolute terms. So absolute increases (TWh) are shown alongside."
+    },
+    "dataNote": {
+      "zh": "多數國家的政府並未單獨統計資料中心用電，因此下表只列出有可靠公開數據的國家與區域。",
+      "en": "Most governments do not report data-center electricity separately, so only countries and regions with reliable public data are listed."
     },
     "rows": [
       {
@@ -18,27 +22,44 @@
         "name": { "zh": "全球", "en": "World" },
         "nationalPct": 3.6,
         "dcPct": 14.7,
+        "dcFrom": 415,
+        "dcTo": 945,
         "period": "2024–2030",
-        "note": { "zh": "全球用電年增 3.6%；資料中心用電 2024→2030 從 415 增至 945 TWh（約年增 14.7%）", "en": "Global demand grows 3.6%/yr; data centers go from 415 to 945 TWh over 2024–2030 (~14.7%/yr)" },
+        "note": { "zh": "全球用電年增 3.6%；資料中心從 415 增至 945 TWh，等於新增 530 TWh——比日本全國一年用電還多。", "en": "Global demand grows 3.6%/yr; data centers go from 415 to 945 TWh — an increase of 530 TWh, more than Japan's entire annual consumption." },
         "source": { "label": "IEA Electricity 2026 / Energy and AI", "url": "https://www.iea.org/reports/electricity-2026/demand" }
       },
       {
         "iso3": "USA",
         "name": { "zh": "美國", "en": "United States" },
         "nationalPct": 2,
-        "dcPct": 13,
+        "dcPct": 15.1,
+        "dcFrom": 180,
+        "dcTo": 420,
         "period": "2024–2030",
-        "note": { "zh": "全國用電年增約 2%，但約一半的新增需求來自資料中心；資料中心佔全美用電將從 4%（2023）升至 7–12%（2028）", "en": "National demand grows ~2%/yr, yet about half of all new demand comes from data centers; their share rises from 4% (2023) to 7–12% (2028)" },
-        "source": { "label": "IEA Electricity 2026 / EIA", "url": "https://www.iea.org/reports/electricity-2026/demand" }
+        "note": { "zh": "全國用電年增約 2%，但約一半的新增需求來自資料中心。資料中心用電 +240 TWh（+130%）——絕對增量全球最大，佔全美用電比從 4%（2023）升至 7–12%（2028）。", "en": "National demand grows ~2%/yr, yet about half of all new demand comes from data centers. They add 240 TWh (+130%) — the largest absolute increase worldwide — lifting their share from 4% (2023) to 7–12% (2028)." },
+        "source": { "label": "IEA Energy and AI / EIA", "url": "https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai" }
       },
       {
         "iso3": "CHN",
         "name": { "zh": "中國", "en": "China" },
         "nationalPct": 4.9,
-        "dcPct": 17,
+        "dcPct": 18.1,
+        "dcFrom": 102,
+        "dcTo": 277,
         "period": "2024–2030",
-        "note": { "zh": "全國用電年增 4.9%；資料中心用電預估成長約 170%（約年增 17%）", "en": "National demand grows 4.9%/yr; data-center consumption is projected to rise ~170% (~17%/yr)" },
-        "source": { "label": "IEA Electricity 2026 / Energy and AI", "url": "https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai" }
+        "note": { "zh": "資料中心用電 +175 TWh（+170%），成長「率」高於美國，但新增電量少於美國的 +240 TWh。中美合計佔全球資料中心成長近 80%。", "en": "Data centers add 175 TWh (+170%) — a faster growth rate than the US, but a smaller absolute increase than America's +240 TWh. Together the two account for nearly 80% of global data-center growth." },
+        "source": { "label": "IEA Energy and AI", "url": "https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai" }
+      },
+      {
+        "iso3": "EUR4",
+        "name": { "zh": "歐洲四國（德/法/英/荷）", "en": "Major Europe (DE/FR/UK/NL)" },
+        "nationalPct": 2.3,
+        "dcPct": null,
+        "dcFrom": 41,
+        "dcTo": null,
+        "period": "2024",
+        "note": { "zh": "四國資料中心合計 41 TWh，佔全球資料中心用電約 10%。歐盟整體用電預估 2026–2030 年均成長 2.3%。", "en": "These four countries' data centers total 41 TWh, about 10% of the global data-center load. EU-wide demand is projected to grow 2.3%/yr in 2026–2030." },
+        "source": { "label": "IEA Energy and AI / Electricity 2026", "url": "https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai" }
       },
       {
         "iso3": "IRL",
@@ -46,8 +67,37 @@
         "nationalPct": null,
         "dcPct": null,
         "period": "2015–2024",
-        "note": { "zh": "極端案例：資料中心佔全國用電從 5%（2015）暴增到 22%（2024），已超過全國都市家庭用電總和（18%）", "en": "The extreme case: data centers went from 5% of national electricity (2015) to 22% (2024) — more than all urban households combined (18%)" },
+        "note": { "zh": "全球佔比最高的極端案例：資料中心佔全國用電從 5%（2015）暴增到 22%（2024），已超過全國都市家庭用電總和（18%）。", "en": "The world's most extreme case: data centers went from 5% of national electricity (2015) to 22% (2024) — more than all urban households combined (18%)." },
         "source": { "label": "愛爾蘭中央統計局 CSO (2025)", "url": "https://www.cso.ie/en/releasesandpublications/ep/p-dcmec/datacentresmeteredelectricityconsumption2024/keyfindings/" }
+      },
+      {
+        "iso3": "MYS",
+        "name": { "zh": "馬來西亞", "en": "Malaysia" },
+        "nationalPct": 5.3,
+        "dcPct": 41,
+        "dcFrom": 8.5,
+        "dcTo": 68,
+        "period": "2024–2030",
+        "note": { "zh": "全球成長最猛的市場之一：資料中心用電六年內從 8.5 增至 68 TWh（8 倍）。柔佛州的資料中心到 2035 年可能吃掉全州 40% 用電。", "en": "One of the world's fastest-growing markets: data-center electricity leaps from 8.5 to 68 TWh in six years (8×). In Johor state, data centers could consume 40% of state electricity by 2035." },
+        "source": { "label": "Wood Mackenzie / The Edge Malaysia (2025)", "url": "https://theedgemalaysia.com/node/807442" }
+      },
+      {
+        "iso3": "SGP",
+        "name": { "zh": "新加坡", "en": "Singapore" },
+        "nationalPct": 5.3,
+        "dcPct": null,
+        "period": "2024–2026",
+        "note": { "zh": "電網容量吃緊，2019 年曾對新建資料中心祭出禁令，現改為嚴格條件審查；2026 年資料中心容量約 1.46GW，仍居東南亞第一，但成長讓位給柔佛、曼谷、雅加達。", "en": "Facing grid limits, Singapore imposed a data-center moratorium in 2019, now replaced by strict conditions. Capacity is ~1.46 GW in 2026 — still Southeast Asia's largest — but growth has shifted to Johor, Bangkok and Jakarta." },
+        "source": { "label": "DCD / TNGlobal (2026)", "url": "https://www.datacenterdynamics.com/en/analysis/after-the-moratorium-how-singapore-plans-to-stay-in-data-center-race/" }
+      },
+      {
+        "iso3": "JPNKOR",
+        "name": { "zh": "日本＋韓國", "en": "Japan + Korea" },
+        "nationalPct": null,
+        "dcPct": null,
+        "period": "2024",
+        "note": { "zh": "兩國合計約佔全球資料中心用電 5%（約 21 TWh）。日本 2040 年電力規劃已把資料中心列為需求成長主因之一。", "en": "Together they account for ~5% of global data-center electricity (~21 TWh). Japan's 2040 energy plan cites data centers as a key driver of demand growth." },
+        "source": { "label": "IEA Energy and AI", "url": "https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai" }
       },
       {
         "iso3": "TWN",
@@ -55,10 +105,24 @@
         "nationalPct": null,
         "dcPct": null,
         "period": "2024–2030",
-        "note": { "zh": "資料中心目前僅佔全台用電約 0.16%，但台電估 2024–2030 年 AI（含資料中心）將累計新增約 1.85GW 用電；國科會估 AI 算力中心從 2026 年 60MW 增至 2029 年 450MW（6.5 倍）", "en": "Data centers use just ~0.16% of Taiwan's electricity today, but Taipower expects ~1.85 GW of cumulative new AI/data-center load in 2024–2030, and the NSTC projects AI compute centers to grow from 60 MW (2026) to 450 MW (2029) — 6.5×" },
+        "note": { "zh": "資料中心目前僅佔全台用電約 0.16%，但台電估 2024–2030 年 AI（含資料中心）將累計新增約 1.85GW 用電；國科會估 AI 算力中心從 2026 年 60MW 增至 2029 年 450MW（6.5 倍）。", "en": "Data centers use just ~0.16% of Taiwan's electricity today, but Taipower expects ~1.85 GW of cumulative new AI/data-center load in 2024–2030, and the NSTC projects AI compute centers to grow from 60 MW (2026) to 450 MW (2029) — 6.5×." },
         "source": { "label": "報導者 / 台電 / 國科會", "url": "https://www.twreporter.org/a/data-center-electricity-demand" }
       }
     ]
+  },
+  "whyMw": {
+    "title": { "zh": "為什麼算力要用「電力（MW）」來衡量？", "en": "Why is AI compute measured in megawatts?" },
+    "text": {
+      "zh": "因為對電網而言，一座 AI 資料中心就是一個「用電戶」，衡量它的唯一共通單位是功率（MW＝百萬瓦）。晶片數量會因世代不同而失真（一顆新晶片可能抵十顆舊的），但電力不會：300MW 就是 300MW，可以直接跟一座燃氣電廠或一座城市相比。業界也用 MW 來規劃：申請併網、簽購電契約、評估變電站容量，全都以 MW 計價。所以「這座 AI 叢集有多大」在能源界的答案永遠是幾 MW，而不是幾張 GPU。",
+      "en": "To a grid operator, an AI data center is simply a load — and the only universal unit for that is power (MW). Chip counts distort across generations (one new chip can replace ten old ones), but electricity does not: 300 MW is 300 MW, directly comparable to a gas plant or a city. The industry plans in MW too — grid connection requests, power purchase agreements and substation sizing are all denominated in megawatts. So in energy terms, the size of an AI cluster is always answered in MW, not GPUs."
+    }
+  },
+  "re100": {
+    "text": {
+      "zh": "脈絡：全球有 442 家企業加入 RE100（承諾 100% 使用再生電力），合計年用電 583 TWh——約佔全球用電 2%，比整個南韓還多；2024 年這些企業的再生能源比例平均為 53%。但多數企業只公布比例、不公布絕對用電量，因此下表有不少「未揭露」。",
+      "en": "Context: 442 companies have joined RE100 (pledging 100% renewable electricity), together using 583 TWh a year — about 2% of world electricity, more than all of South Korea. Their average renewable share reached 53% in 2024. Most, however, publish only percentages and not absolute consumption — hence the many 'not disclosed' entries below."
+    },
+    "source": { "label": "RE100 / Climate Group (2025)", "url": "https://www.there100.org/our-work/press/re100s-electricity-consumption-overtakes-south-koreas-calls-action-ahead-11th-basic" }
   },
   "context": [
     {

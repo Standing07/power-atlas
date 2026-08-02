@@ -77,14 +77,35 @@ export default function AI() {
       <section>
         <h3 className="text-xl font-bold text-stone-900">📈 {t('ai_growth_title')}</h3>
         <p className="mt-1 max-w-3xl text-sm leading-relaxed text-stone-500">{pick(lang as Lang, gc.note as L10n)}</p>
+        <p className="mt-2 max-w-3xl rounded-2xl bg-stone-100 px-4 py-2 text-xs leading-relaxed text-stone-500">
+          ℹ️ {pick(lang as Lang, gc.dataNote as L10n)}
+        </p>
         <div className="mt-5 space-y-4">
           {gc.rows.map((r) => (
             <div key={r.iso3} className="rounded-3xl border border-stone-200 bg-white p-5 shadow-sm">
               <div className="flex flex-wrap items-center gap-2">
-                {r.iso3 !== 'WORLD' && <Flag iso2={r.iso3 === 'USA' ? 'US' : r.iso3 === 'CHN' ? 'CN' : r.iso3 === 'IRL' ? 'IE' : r.iso3 === 'TWN' ? 'TW' : null} />}
+                {r.iso3 !== 'WORLD' && GROWTH_FLAG[r.iso3] !== undefined && <Flag iso2={GROWTH_FLAG[r.iso3]} />}
+                {GROWTH_FLAG[r.iso3] === undefined && r.iso3 !== 'WORLD' && <span>🌏</span>}
                 <span className="font-bold text-stone-900">{pick(lang as Lang, r.name as L10n)}</span>
                 <span className="rounded-full bg-stone-100 px-2 py-0.5 text-[11px] text-stone-500">{r.period}</span>
               </div>
+
+              {/* 絕對增量（TWh）——比百分比更能看出真實衝擊 */}
+              {r.dcFrom != null && (
+                <div className="mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-2xl bg-amber-50 px-4 py-2.5">
+                  <span className="text-xs text-amber-700">{t('ai_dc_abs')}</span>
+                  <span className="text-lg font-bold text-stone-900">{fmt(r.dcFrom, r.dcFrom < 100 ? 1 : 0)} TWh</span>
+                  {r.dcTo != null && (
+                    <>
+                      <span className="text-stone-400">→</span>
+                      <span className="text-lg font-bold text-amber-600">{fmt(r.dcTo)} TWh</span>
+                      <span className="rounded-full bg-amber-500 px-2 py-0.5 text-xs font-semibold text-white">
+                        +{fmt(r.dcTo - r.dcFrom)} TWh
+                      </span>
+                    </>
+                  )}
+                </div>
+              )}
 
               {r.nationalPct != null && r.dcPct != null && (
                 <div className="mt-3 space-y-2">
@@ -124,6 +145,13 @@ export default function AI() {
         <p className="mt-1 text-sm text-stone-500">{t('ai_sec2_sub')}</p>
       </div>
 
+      <section className="rounded-3xl border border-stone-200 bg-stone-50 p-5">
+        <p className="text-sm leading-relaxed text-stone-600">{pick(lang as Lang, aiEnergy.re100.text as L10n)}</p>
+        <a href={aiEnergy.re100.source.url} target="_blank" rel="noreferrer" className="mt-2 inline-block text-xs text-brand-600 hover:underline">
+          {t('source_label')}：{aiEnergy.re100.source.label} ↗
+        </a>
+      </section>
+
       <section>
         <div className="overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm">
           {TECH_COMPANIES.map((c) => (
@@ -162,10 +190,16 @@ export default function AI() {
         </p>
       </section>
 
-      {/* ───────── ③ 全球 AI 超級電腦資料庫 ───────── */}
+      {/* ───────── ③ 全球 AI 資料中心叢集資料庫 ───────── */}
       <div className="border-t-2 border-brand-100 pt-8">
         <h2 className="text-2xl font-bold text-stone-900">{t('ai_sec3')}</h2>
       </div>
+
+      {/* 為什麼算力用 MW 衡量 */}
+      <section className="rounded-3xl border-2 border-amber-100 bg-amber-50/60 p-5">
+        <h3 className="font-bold text-amber-800">💡 {pick(lang as Lang, aiEnergy.whyMw.title as L10n)}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-stone-700">{pick(lang as Lang, aiEnergy.whyMw.text as L10n)}</p>
+      </section>
 
       {/* AI 超級電腦排行 */}
       {data && (
@@ -194,6 +228,7 @@ export default function AI() {
           <a href={data.source.url} target="_blank" rel="noreferrer" className="mt-2 inline-block text-xs text-brand-600 hover:underline">
             {t('source_label')}：{data.source.label} ↗
           </a>
+          <p className="mt-1 text-[11px] text-stone-400">※ {t('ai_source_note')}</p>
         </section>
       )}
 
@@ -240,12 +275,18 @@ export default function AI() {
   )
 }
 
-/** 第 ② 段：AI 相關的科技巨頭（雲端、半導體），依用電量與綠電比例排序 */
-const TECH_IDS = ['google', 'amazon', 'microsoft', 'meta', 'apple', 'tsmc', 'samsung', 'intel', 'tencent', 'alibaba', 'umc']
-const TECH_COMPANIES = TECH_IDS
-  .map((id) => companiesData.companies.find((c) => c.id === id))
-  .filter(Boolean)
-  .sort((a, b) => (b!.electricityTWh ?? -1) - (a!.electricityTWh ?? -1)) as typeof companiesData.companies
+/** 成長率對比列的國旗；區域彙總（歐洲四國、日韓）無單一國旗，顯示地球 */
+const GROWTH_FLAG: Record<string, string | null> = {
+  USA: 'US', CHN: 'CN', IRL: 'IE', TWN: 'TW', MYS: 'MY', SGP: 'SG',
+}
+
+/** 第 ② 段：全部已收錄企業，有揭露用電量者排前面，其次依綠電比例 */
+const TECH_COMPANIES = [...companiesData.companies].sort((a, b) => {
+  const ea = a.electricityTWh ?? -1
+  const eb = b.electricityTWh ?? -1
+  if (ea !== eb) return eb - ea
+  return (b.renewablePct ?? -1) - (a.renewablePct ?? -1)
+})
 
 /** ISO3 → ISO2（給國旗用）：只需常見國家，其餘回 null 顯示地球 */
 const ISO3_TO_2: Record<string, string> = {
