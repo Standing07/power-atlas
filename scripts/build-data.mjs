@@ -487,10 +487,18 @@ async function main() {
   )
   await writeFile(path.join(STAGE, 'world.geo.json'), JSON.stringify(geo))
 
-  // 原子性搬移：驗證全過才覆蓋
-  await rm(OUT, { recursive: true, force: true })
-  await mkdir(path.dirname(OUT), { recursive: true })
-  await rename(STAGE, OUT)
+  // 原子性搬移：驗證全過才覆蓋。
+  // ⚠️ 只替換「本管線自己產生」的檔案，NEVER 砍掉整個 public/data——
+  // 其他管線的產物（plants/ 由 build-plants.mjs、ai-compute.json 由 build-ai.mjs）
+  // 也住在同一個資料夾，整夾刪除會把它們一起誤殺。
+  // （2026-08-05 的每月自動更新就是這樣刪掉 150 個檔案，線上電廠地圖與 AI 資料因此消失。）
+  const OWNED = ['countries.json', 'world.geo.json', 'country']
+  await mkdir(OUT, { recursive: true })
+  for (const name of OWNED) {
+    await rm(path.join(OUT, name), { recursive: true, force: true })
+    await rename(path.join(STAGE, name), path.join(OUT, name))
+  }
+  await rm(STAGE, { recursive: true, force: true })
 
   console.log('[5/5] 完成 ✓')
   console.log(`  countries.json：${index.length} 個國家`)
