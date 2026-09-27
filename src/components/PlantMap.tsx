@@ -37,8 +37,12 @@ export default function PlantMap({ iso3 }: { iso3: string }) {
     if (!mapEl.current || mapRef.current) return
     // preferCanvas：以 canvas 繪製標記，讓美/中等上千座電廠的國家仍流暢
     const map = L.map(mapEl.current, { scrollWheelZoom: true, attributionControl: true, preferCanvas: true })
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-      attribution: '© OpenStreetMap · © CARTO',
+    // 底圖用 OpenStreetMap 官方圖磚：使用政策公開、免金鑰，網站合理流量下可用並須標註來源。
+    // （2026-09 CARTO 改為必須帶 API key，原本的 basemaps.cartocdn.com 只會回傳
+    //  「API KEY REQUIRED」浮水印圖，導致所有電廠地圖的底圖消失。）
+    // OSM 原圖較彩色會蓋過彩色電廠點，故在 index.css 用 CSS 濾鏡轉成淺灰。
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors',
       maxZoom: 18,
     }).addTo(map)
     layerRef.current = L.layerGroup().addTo(map)

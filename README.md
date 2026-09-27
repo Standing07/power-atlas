@@ -56,4 +56,4 @@ npm run data       # 重新抓取並驗證最新資料（--force 可強制重新
 
 ## 大型發電廠地圖
 
-國家頁的電廠地圖使用 [WRI Global Power Plant Database](https://datasets.wri.org/dataset/globalpowerplantdatabase)（v1.3, 2021, CC BY 4.0），篩選裝置容量 ≥100MW 的電廠，依國家產出 `public/data/plants/{ISO3}.json`。地圖以 Leaflet + OpenStreetMap/CARTO 底圖呈現。此資料為 2021 凍結版，重建指令：`npm run plants`。
+國家頁的電廠地圖使用 [WRI Global Power Plant Database](https://datasets.wri.org/dataset/globalpowerplantdatabase)（v1.3, 2021, CC BY 4.0），篩選裝置容量 ≥100MW 的電廠，依國家產出 `public/data/plants/{ISO3}.json`。地圖以 Leaflet + OpenStreetMap 底圖呈現（2026-09 起改用 OSM 官方圖磚，因 CARTO 改為必須帶 API key）。重點國家與東亞 33 國已改用 GEM（2026-03），美國用 EIA-860M。重建指令：`npm run plants`。

@@ -18,3 +18,10 @@ html {
 body {
   @apply bg-stone-50 text-stone-800 antialiased;
 }
+
+/* 電廠地圖底圖：OpenStreetMap 原圖偏彩色，會蓋過彩色的電廠圓點。
+   只對「底圖圖磚」去彩度、提亮，做出接近 CARTO Positron 的淺灰效果；
+   電廠標記畫在另一個圖層（overlay pane），不受影響。 */
+.leaflet-tile-pane {
+  filter: grayscale(1) brightness(1.06) contrast(0.92);
+}
